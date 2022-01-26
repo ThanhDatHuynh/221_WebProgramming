@@ -1,7 +1,9 @@
 import React from "react";
 class IndexPage extends React.Component {
   render = () => {
-    return <div>This is main page</div>;
+    return (
+      <img style={{ width: "100%" }} src={require("../images/Temp.jfif")} />
+    );
   };
 }
 

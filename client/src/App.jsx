@@ -15,6 +15,7 @@ class App extends React.Component {
           <Routes>
             <Route exact path="/" element={<IndexPage {...this.props} />} />
             {/* Ortherwise redirect to main page */}
+            <Route exact path="/products" element={<>Product</>} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
