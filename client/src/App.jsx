@@ -3,7 +3,7 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import Navbar from "./components/NavBar";
-
+import Footer from "./components/Footer";
 import IndexPage from "./pages/IndexPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -29,6 +29,7 @@ class App extends React.Component {
               element={<RegisterPage {...this.props} />}
             />
           </Routes>
+          <Footer/>
         </div>
       </BrowserRouter>
     );
