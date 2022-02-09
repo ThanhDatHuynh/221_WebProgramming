@@ -19,7 +19,7 @@ class Footer extends React.Component {
           <ul>
             <li>
               <div className="footer-icon">
-                <FontAwesomeIcon icon={faPhoneAlt} />
+                <FontAwesomeIcon icon={faPhoneAlt} className="icon"/>
               </div>
               <div className="footer-information">Call: 123456789</div>
             </li>
