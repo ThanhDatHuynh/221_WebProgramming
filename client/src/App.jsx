@@ -5,18 +5,29 @@ import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 import Navbar from "./components/NavBar";
 
 import IndexPage from "./pages/IndexPage";
-
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+  }
   render = () => {
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar />
+          <Navbar {...this.props} />
           <Routes>
             <Route exact path="/" element={<IndexPage {...this.props} />} />
-            {/* Ortherwise redirect to main page */}
-            <Route exact path="/products" element={<>Product</>} />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route
+              exact
+              path="/login"
+              element={<LoginPage {...this.props} />}
+            />
+            <Route
+              exact
+              path="/register"
+              element={<RegisterPage {...this.props} />}
+            />
           </Routes>
         </div>
       </BrowserRouter>

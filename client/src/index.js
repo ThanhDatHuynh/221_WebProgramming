@@ -7,10 +7,11 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "font-awesome/css/font-awesome.min.css";
 import { CookiesProvider, useCookies } from "react-cookie";
+import { BrowserRouter, Routes, Route, Link, Navigate } from "react-router-dom";
 ReactDOM.render(
   <CookiesProvider>
     <React.StrictMode>
-      <App />
+        <App />
     </React.StrictMode>
   </CookiesProvider>,
   document.getElementById("root")

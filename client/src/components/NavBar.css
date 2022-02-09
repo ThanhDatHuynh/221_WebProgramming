@@ -97,8 +97,7 @@
 .login-register {
     width: 20%;
     display: flex;
-    justify-self: flex-end;
-    margin-right: 10px;
+    flex-direction: row-reverse;
 }
 
 @media screen and (max-width: 1000px) {

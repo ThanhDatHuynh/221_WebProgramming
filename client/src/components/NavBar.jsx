@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
+import {withRouter} from "../common/withRouter"
+
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
@@ -76,11 +78,25 @@ class NavBar extends React.Component {
           </li>
         </ul>
         <div className="login-register">
-          <button className="navbar-button">Login</button>
-          <button className="navbar-button">Register</button>
+          <button
+            className="navbar-button"
+            onClick={() => {
+              this.props.navigate("/register");
+            }}
+          >
+            Register
+          </button>
+          <button
+            className="navbar-button"
+            onClick={() => {
+              this.props.navigate("/login");
+            }}
+          >
+            Login
+          </button>
         </div>
       </nav>
     );
   };
 }
-export default NavBar;
+export default withRouter(NavBar);
