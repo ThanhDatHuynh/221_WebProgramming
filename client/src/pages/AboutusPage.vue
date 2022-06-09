@@ -2,12 +2,12 @@
     <div>
         <div class="d-flex flex-wrap justify-center mx-8 my-15">
             <div class="images mx-4">
-                <img src="@/assets/About1.png" alt="Restaurant Information 1" />
+                <img src="@/assets/About1.png" alt="Restaurant Information 1" class="rounded"/>
             </div>
             <div class="images mx-4">
-                <div :style="{ marginBottom: '8%' }"><img src="@/assets/About2.png" alt="Restaurant Information 2" />
+                <div :style="{ marginBottom: '8%' }"><img src="@/assets/About2.png" alt="Restaurant Information 2" class="rounded"/>
                 </div>
-                <div :style="{ marginTop: '8%' }"><img src="@/assets/About3.png" alt="Restaurant Information 3" /></div>
+                <div :style="{ marginTop: '8%' }"><img src="@/assets/About3.png" alt="Restaurant Information 3" class="rounded"/></div>
             </div>
             <div class="text-wrapper">
                 <div class="about-title">

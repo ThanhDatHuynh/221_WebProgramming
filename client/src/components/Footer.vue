@@ -13,10 +13,11 @@
       </div>
       <div>
         <span class="menu-title">Contact </span>
-        <p>
-          Call: (+84) 123 456 789 <br />
-          Address: 268 Ly Thuong Kiet, Phuong 14, Quuan 10, Thanh pho Ho Chi Minh
-        </p>
+        <ul>
+          <li>Call: (+84) 123 456 789 </li>
+          <li> Address: 268 Ly Thuong Kiet, Phuong 14, Quuan 10, Thanh pho Ho Chi Minh </li>
+          <li> Open Time: 10am - 11pm </li>
+        </ul>
       </div>
       <div>
         <span class="menu-title">Our news <br /> </span>

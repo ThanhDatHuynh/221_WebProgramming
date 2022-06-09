@@ -179,7 +179,7 @@ export default {
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
       },
       styleBook: {
-        borderRadius: "39px",
+        borderRadius: "8px",
         fontSize: "14px",
       },
     };
