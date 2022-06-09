@@ -15,7 +15,7 @@
         <span class="menu-title">Contact </span>
         <p>
           Call: (+84) 123 456 789 <br />
-          Address: 817 Le Hong Phong Street, Ho Chi Minh City
+          Address: 268 Ly Thuong Kiet, Phuong 14, Quuan 10, Thanh pho Ho Chi Minh
         </p>
       </div>
       <div>
