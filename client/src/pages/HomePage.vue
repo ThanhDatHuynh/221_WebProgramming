@@ -2,7 +2,7 @@
   <div class="background">
     <div class="home-wrapper">
       <div class="home-title">
-        <p>Cozy food zone</p>
+        <p>DHT food zone</p>
       </div>
       <div class="home-description d-flex justify-center">
         <p>

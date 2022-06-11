@@ -2,7 +2,7 @@
   <footer id="footer">
     <div class="wrapper">
       <div class="des">
-        <span class="menu-title">Cozy Foodzone </span>
+        <span class="menu-title">DHT Foodzone </span>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu velit
           tempus erat egestas efficitur. In hac habitasse platea dictumst. Fusce
