@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/bin/yarn install
+  /usr/bin/node /usr/bin/yarn add @fortawesome/pro-duotone-svg-icons
 
 PATH: 
   /home/dathuynh/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/local/go/bin:/home/dathuynh/go/bin
@@ -14,7 +14,17 @@ Platform:
   linux x64
 
 Trace: 
-  Error: ENOENT: no such file or directory, open '/home/dathuynh/.cache/yarn/v6/npm-vue-loader-v16-16.8.1-354f12bc0897954158b71590f800295713a7792d-integrity/node_modules/vue-loader-v16/.yarn-metadata.json'
+  Error: https://registry.yarnpkg.com/@fortawesome%2fpro-duotone-svg-icons: Not found
+      at params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:66138:18)
+      at self.callback (/usr/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (node:events:527:28)
+      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (node:events:527:28)
+      at IncomingMessage.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (node:events:641:28)
+      at IncomingMessage.emit (node:events:539:35)
+      at endReadableNT (node:internal/streams/readable:1344:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 
 npm manifest: 
   {
@@ -22,14 +32,19 @@ npm manifest:
     "version": "0.1.0",
     "private": true,
     "scripts": {
-      "serve": "vue-cli-service serve",
-      "build": "vue-cli-service build",
-      "lint": "vue-cli-service lint"
+      "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+      "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+      "lint": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service lint"
     },
     "dependencies": {
+      "@fortawesome/fontawesome-svg-core": "^6.1.1",
+      "@fortawesome/free-regular-svg-icons": "^6.1.1",
+      "@fortawesome/free-solid-svg-icons": "^6.1.1",
+      "@fortawesome/vue-fontawesome": "^2.0.6",
       "@mdi/font": "^6.4.95",
       "axios": "^0.23.0",
       "core-js": "^3.6.5",
+      "i": "^0.3.7",
       "jquery": "^3.6.0",
       "sass-loader": "^12.3.0",
       "vue": "^2.6.11",
@@ -37,6 +52,7 @@ npm manifest:
       "vue-router": "^3.5.2",
       "vuetify": "^2.5.10",
       "vuex": "^3.6.2",
+      "watch": "^1.0.2",
       "yup": "^0.32.11"
     },
     "devDependencies": {
@@ -986,6 +1002,37 @@ Lockfile:
     dependencies:
       "@babel/helper-validator-identifier" "^7.14.9"
       to-fast-properties "^2.0.0"
+  
+  "@fortawesome/fontawesome-common-types@6.1.1":
+    version "6.1.1"
+    resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.1.1.tgz#7dc996042d21fc1ae850e3173b5c67b0549f9105"
+    integrity sha512-wVn5WJPirFTnzN6tR95abCx+ocH+3IFLXAgyavnf9hUmN0CfWoDjPT/BAWsUVwSlYYVBeCLJxaqi7ZGe4uSjBA==
+  
+  "@fortawesome/fontawesome-svg-core@^6.1.1":
+    version "6.1.1"
+    resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.1.1.tgz#3424ec6182515951816be9b11665d67efdce5b5f"
+    integrity sha512-NCg0w2YIp81f4V6cMGD9iomfsIj7GWrqmsa0ZsPh59G7PKiGN1KymZNxmF00ssuAlo/VZmpK6xazsGOwzKYUMg==
+    dependencies:
+      "@fortawesome/fontawesome-common-types" "6.1.1"
+  
+  "@fortawesome/free-regular-svg-icons@^6.1.1":
+    version "6.1.1"
+    resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-6.1.1.tgz#3f2f58262a839edf0643cbacee7a8a8230061c98"
+    integrity sha512-xXiW7hcpgwmWtndKPOzG+43fPH7ZjxOaoeyooptSztGmJxCAflHZxXNK0GcT0uEsR4jTGQAfGklDZE5NHoBhKg==
+    dependencies:
+      "@fortawesome/fontawesome-common-types" "6.1.1"
+  
+  "@fortawesome/free-solid-svg-icons@^6.1.1":
+    version "6.1.1"
+    resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.1.1.tgz#3369e673f8fe8be2fba30b1ec274d47490a830a6"
+    integrity sha512-0/5exxavOhI/D4Ovm2r3vxNojGZioPwmFrKg0ZUH69Q68uFhFPs6+dhAToh6VEQBntxPRYPuT5Cg1tpNa9JUPg==
+    dependencies:
+      "@fortawesome/fontawesome-common-types" "6.1.1"
+  
+  "@fortawesome/vue-fontawesome@^2.0.6":
+    version "2.0.6"
+    resolved "https://registry.yarnpkg.com/@fortawesome/vue-fontawesome/-/vue-fontawesome-2.0.6.tgz#87e691ed87f28f4667238573a29743f543a087f6"
+    integrity sha512-V3vT3flY15AKbUS31aZOP12awQI3aAzkr2B1KnqcHLmwrmy51DW3pwyBczKdypV8QxBZ8U68Hl2XxK2nudTxpg==
   
   "@hapi/address@2.x.x":
     version "2.1.4"
@@ -2376,9 +2423,9 @@ Lockfile:
       lodash.uniq "^4.5.0"
   
   caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001265:
-    version "1.0.30001267"
-    resolved "https://registry.npmmirror.com/caniuse-lite/download/caniuse-lite-1.0.30001267.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcaniuse-lite%2Fdownload%2Fcaniuse-lite-1.0.30001267.tgz#b1cf2937175afc0570e4615fc2d2f9069fa0ed30"
-    integrity sha1-sc8pNxda/AVw5GFfwtL5Bp+g7TA=
+    version "1.0.30001352"
+    resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001352.tgz"
+    integrity sha512-GUgH8w6YergqPQDGWhJGt8GDRnY0L/iJVQcU3eJ46GYf52R8tk0Wxp0PymuFVZboJYXGiCqwozAYZNRjVj6IcA==
   
   case-sensitive-paths-webpack-plugin@^2.3.0:
     version "2.4.0"
@@ -3684,6 +3731,13 @@ Lockfile:
       md5.js "^1.3.4"
       safe-buffer "^5.1.1"
   
+  exec-sh@^0.2.0:
+    version "0.2.2"
+    resolved "https://registry.yarnpkg.com/exec-sh/-/exec-sh-0.2.2.tgz#2a5e7ffcbd7d0ba2755bdecb16e5a427dfbdec36"
+    integrity sha512-FIUCJz1RbuS0FKTdaAafAByGS0CPvU3R0MeHxgtl+djzCc//F8HakL8GzmVNZanasTbTAY/3DRFA0KpVqj/eAw==
+    dependencies:
+      merge "^1.2.0"
+  
   execa@^0.8.0:
     version "0.8.0"
     resolved "https://registry.nlark.com/execa/download/execa-0.8.0.tgz?cache=0&sync_timestamp=1622825586926&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fexeca%2Fdownload%2Fexeca-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
@@ -4564,6 +4618,11 @@ Lockfile:
     version "1.1.1"
     resolved "https://registry.nlark.com/human-signals/download/human-signals-1.1.1.tgz?cache=0&sync_timestamp=1624364612113&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fhuman-signals%2Fdownload%2Fhuman-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
     integrity sha1-xbHNFPUK6uCatsWf5jujOV/k36M=
+  
+  i@^0.3.7:
+    version "0.3.7"
+    resolved "https://registry.yarnpkg.com/i/-/i-0.3.7.tgz#2a7437a923d59c14b17243dc63a549af24d85799"
+    integrity sha512-FYz4wlXgkQwIPqhzC5TdNMLSE5+GS1IIDJZY/1ZiEPCT2S3COUVZeT5OW4BmW4r5LHLQuOosSwsvnroG9GR59Q==
   
   iconv-lite@0.4.24, iconv-lite@^0.4.24:
     version "0.4.24"
@@ -5490,6 +5549,11 @@ Lockfile:
     version "1.4.1"
     resolved "https://registry.npm.taobao.org/merge2/download/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
     integrity sha1-Q2iJL4hekHRVpv19xVwMnUBJkK4=
+  
+  merge@^1.2.0:
+    version "1.2.1"
+    resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
+    integrity sha512-VjFo4P5Whtj4vsLzsYBu5ayHhoHJ0UqNm7ibvShmbmoz7tGi0vXaoJbGdB+GmDMLUdg8DpQXEIeVDAe8MaABvQ==
   
   methods@~1.1.2:
     version "1.1.2"
@@ -8427,6 +8491,14 @@ Lockfile:
     version "3.6.2"
     resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
     integrity sha512-ETW44IqCgBpVomy520DT5jf8n0zoCac+sxWnn+hMe/CzaSejb/eVw2YToiXYX+Ex/AuHHia28vWTq4goAexFbw==
+  
+  watch@^1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/watch/-/watch-1.0.2.tgz#340a717bde765726fa0aa07d721e0147a551df0c"
+    integrity sha1-NApxe952Vyb6CqB9ch4BR6VR3ww=
+    dependencies:
+      exec-sh "^0.2.0"
+      minimist "^1.2.0"
   
   watchpack-chokidar2@^2.0.1:
     version "2.0.1"

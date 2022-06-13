@@ -2,25 +2,27 @@
     <div>
         <div class="d-flex flex-wrap justify-center mx-8 my-15">
             <div class="images mx-4">
-                <img src="@/assets/About1.png" alt="Restaurant Information 1" class="rounded"/>
+                <img src="@/assets/About1.png" alt="Restaurant Information 1" class="rounded" />
             </div>
             <div class="images mx-4">
-                <div :style="{ marginBottom: '8%' }"><img src="@/assets/About2.png" alt="Restaurant Information 2" class="rounded"/>
+                <div :style="{ marginBottom: '8%' }"><img src="@/assets/About2.png" alt="Restaurant Information 2"
+                        class="rounded" />
                 </div>
-                <div :style="{ marginTop: '8%' }"><img src="@/assets/About3.png" alt="Restaurant Information 3" class="rounded"/></div>
+                <div :style="{ marginTop: '8%' }"><img src="@/assets/About3.png" alt="Restaurant Information 3"
+                        class="rounded" /></div>
             </div>
             <div class="text-wrapper">
-                <div class="about-title">
+                <div class="about-title text-center">
                     <p>About Us</p>
                 </div>
-                <div class="about-description">
+                <div class="about-description text-justify">
                     <p>Fish is one of the most wholesome foods that man can eat. In fact, people have been eating fish
                         throughout human history. These days, many cooks yearn Fish is one of the most wholesome foods
                         that man can eat. In fact,</p>
                     <p>Fish is one of the most wholesome foods that man can eat. In fact, people have been eating fish
                         throughout human history. These days, many cooks yearn Fish is</p>
                 </div>
-                <div class="btn-wrapper d-flex">
+                <div class="btn-wrapper d-flex flex-wrap justify-center">
                     <Button @onClick="handleExploreBtnClick" text="Explore More" width="148px" height="53px"
                         to="/menu" />
                 </div>
@@ -40,12 +42,28 @@
                 <Service :service="service" />
             </div>
         </div>
-        <div class="d-flex flex-wrap justify-center my-15">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.494668101275!2d106.65842525037046!3d10.773374292285911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ec3c161a3fb%3A0xef77cd47a1cc691e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBCw6FjaCBraG9hIC0gxJDhuqFpIGjhu41jIFF14buRYyBnaWEgVFAuSENN!5e0!3m2!1svi!2s!4v1654789321934!5m2!1svi!2s"
-                width="600" height="450" style="border:0; border-radius:15px;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+        <div class="justify-center my-15 mx-15 row">
+            <div class="col-md-6 align-items-center">
+                <div class="about-title text-center">Our Infomation</div>
+                <ul style="padding-left:10%; padding-top: 5%">
+                    <li class="d-flex mx-auto my-5">
+                        <font-awesome-icon icon="fa-solid fa-phone" class="mx-4" /> Call: (+84) 123 456 789
+                    </li>
+                    <li class="d-flex mx-auto my-5">
+                        <font-awesome-icon icon="fa-solid fa-location-dot" class="mx-4" /> Address: 268 Ly Thuong Kiet, Phuong 14, Quan 10, Thanh pho Ho Chi Minh
+                    </li>
+                    <li class="d-flex mx-auto my-5">
+                        <font-awesome-icon icon="fa-solid fa-clock" class="mx-4" /> Open Time: 10am - 11pm
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.494668101275!2d106.65842525037046!3d10.773374292285911!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ec3c161a3fb%3A0xef77cd47a1cc691e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBCw6FjaCBraG9hIC0gxJDhuqFpIGjhu41jIFF14buRYyBnaWEgVFAuSENN!5e0!3m2!1svi!2s!4v1654789321934!5m2!1svi!2s"
+                    width="100%" height="450" style="border:0; border-radius:15px;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
         </div>
     </div>
 </template>
