@@ -1,5 +1,9 @@
 <template>
-  <v-card class="mx-8 my-10" width="330" height="400">
+  <v-card 
+  :to="'/menu/' + dish.id"
+  class="mx-8 my-10" 
+  width="330" 
+  height="400">
     <div>
       <v-img height="220" :src="dish.image" />
     </div>

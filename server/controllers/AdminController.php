@@ -31,7 +31,7 @@ class AdminController
       return;
     }
 
-    $payload = ['name', 'description', 'image'];
+    $payload = ['name', 'description', 'image', 'price'];
     $formValid = new FormMiddleware();
     $check = $formValid->checkFullFields($payload);
 
@@ -39,14 +39,14 @@ class AdminController
       $name = $_POST['name'];
       $description = $_POST['description'];
       $image = $_POST['image'];
-
+      $price = $_POST['price'];
       $db = Db::getInstance();
-      $sql = "Insert into dish (name,description,image) Values ('$name','$description','$image')";
+      $sql = "Insert into dish (name,description,image) Values ('$name','$description','$image', $price)";
       $row = mysqli_query($db, $sql);
       $id = mysqli_insert_id($db);
 
       if ($row) {
-        $dish = new dish_model($id, $name, $description, $image);
+        $dish = new dish_model($id, $name, $description, $image, $price);
         echo json_encode(["response" => $dish, 'status' => 200]);
       } else {
         echo json_encode(["message" => "Server of database is error", 'status' => 500]);
@@ -63,7 +63,7 @@ class AdminController
       return;
     }
 
-    $payload = ['name', 'description', 'image'];
+    $payload = ['name', 'description', 'image', 'price'];
     $formValid = new FormMiddleware();
     $check = $formValid->checkFullFields($payload);
 
@@ -78,8 +78,8 @@ class AdminController
         $name = $_POST['name'];
         $description = $_POST['description'];
         $image = $_POST['image'];
-
-        $sql = "Update dish set name = '$name', description = '$description', image = '$image' where id = $id";
+        $price = $_POST['price'];
+        $sql = "Update dish set name = '$name', description = '$description', image = '$image', price = $price where id = $id";
         $row = mysqli_query($db, $sql);
 
         if ($row) {

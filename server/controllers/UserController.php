@@ -251,22 +251,18 @@ class UserController
   public function getBlogAll()
   {
     $list = [];
-
     $db = Db::getInstance();
     $sql = 'SELECT * FROM blog';
     $result = mysqli_query($db, $sql);
-
     if ($result->num_rows > 0) {
       while ($row = mysqli_fetch_assoc($result)) {
         $list[] = new blog_model($row['id'], $row['title'], $row['content'], $row['image'], $row['date']);
       }
-
       echo json_encode(['response' => $list, 'status' => 200]);
     } else {
       echo json_encode(['message' => "Server or database is error", 'status' => 500]);
     }
   }
-
   public function getBlogDetail($param)
   {
 
@@ -302,7 +298,7 @@ class UserController
     }
   }
 
-  public function getDishDetail($param)
+  public function getMenuDetail($param)
   {
     $id = substr($param, 1, -1);
 
@@ -312,14 +308,13 @@ class UserController
 
     if ($result->num_rows) {
       $row = mysqli_fetch_assoc($result);
-      $dish = new dish_model($row['id'], $row['name'], $row['description'], $row['image']);
+      $dish = new dish_model($row['id'], $row['name'], $row['description'], $row['image'], $row['price']);
 
       echo json_encode(['response' => $dish, 'status' => 200]);
     } else {
       echo json_encode(['message' => "Server or database is error", 'status' => 500]);
     }
   }
-
   public function getMenu()
   {
     $list = [];
@@ -330,7 +325,7 @@ class UserController
 
     if ($result->num_rows) {
       while ($row = mysqli_fetch_assoc($result)) {
-        $list[] = new dish_model($row['id'], $row['name'], $row['description'], $row['image']);
+        $list[] = new dish_model($row['id'], $row['name'], $row['description'], $row['image'],  $row['price']);
       }
 
       echo json_encode(['response' => $list, 'status' => 200]);

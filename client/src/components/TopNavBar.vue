@@ -3,6 +3,11 @@
     <div class="d-flex">
       <div class="mr-auto"></div>
       <div class="NavBar">
+        <div v-show="user != null">
+          <v-btn depressed color="black" to="/cart" small>
+            <span class="linkText">Cart</span>
+          </v-btn>
+        </div>
         <div>
           <v-btn depressed color="black" to="/" small>
             <span class="linkText">Home</span>
@@ -29,25 +34,13 @@
           </v-btn>
         </div>
         <div>
-          <v-btn
-            v-show="user === null"
-            depressed
-            color="black"
-            to="/auth"
-            small
-          >
+          <v-btn v-show="user === null" depressed color="black" to="/auth" small>
             <span class="linkText">Sign in</span>
           </v-btn>
         </div>
 
         <div>
-          <v-btn
-            v-show="user !== null"
-            depressed
-            color="black"
-            to="/account/profile"
-            small
-          >
+          <v-btn v-show="user !== null" depressed color="black" to="/account/profile" small>
             <span class="linkText"> Acccount</span>
           </v-btn>
         </div>
@@ -79,48 +72,61 @@ export default {
 .together {
   min-width: 0;
 }
+
 .container {
   width: 100vw;
   margin: 0;
   background-color: black;
 }
+
 .linkText {
   color: white;
 }
+
 .NavBar {
   display: flex;
 }
+
 @media (max-width: 45em) {
-  .NavBar > div:nth-child(1) {
+  .NavBar>div:nth-child(1) {
     display: none;
   }
-  .NavBar > div:nth-child(2) {
+
+  .NavBar>div:nth-child(2) {
     display: none;
   }
-  .NavBar > div:nth-child(4) {
+
+  .NavBar>div:nth-child(4) {
     display: none;
   }
 }
+
 @media (max-width: 15em) {
-  .NavBar > div:nth-child(1) {
+  .NavBar>div:nth-child(1) {
     display: none;
   }
-  .NavBar > div:nth-child(2) {
+
+  .NavBar>div:nth-child(2) {
     display: none;
   }
-  .NavBar > div:nth-child(4) {
+
+  .NavBar>div:nth-child(4) {
     display: none;
   }
-  .NavBar > div {
+
+  .NavBar>div {
     width: 70%;
     padding: 0px;
   }
+
   .NavBar {
     flex-wrap: wrap;
   }
-  .NavBar > div > v-btn {
+
+  .NavBar>div>v-btn {
     width: 50%;
   }
+
   .buttonSize {
     width: 50px;
   }

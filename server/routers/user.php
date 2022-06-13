@@ -3,7 +3,7 @@
    $router->get('/blog/{id}', 'UserController@getBlogDetail');
    $router->get('/dish/{id}', 'UserController@getDishDetail');
    $router->get('/menu', 'UserController@getMenu');
-
+   $router->get('/menu/{id}', 'UserController@getMenuDetail');
    $router->post('/reservation', 'UserController@reservation');
    
    $router->post('/comment/create', 'UserController@createComment');

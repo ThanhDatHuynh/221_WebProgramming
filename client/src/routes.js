@@ -13,7 +13,8 @@ import EditBlogPage from "./pages/EditBlogPage";
 import EditDishPage from "./pages/EditDishPage";
 import AdminMenu from "./pages/AdminMenu";
 import AdminUser from "./pages/AdminUser";
-
+import MenuDetailPage from "./pages/MenuDetailPage";
+import CartPage from "./pages/CartPage";
 const routes = [
   { path: "/", name: "homePage", component: HomePage },
 
@@ -21,9 +22,11 @@ const routes = [
   { path: "/blog/:id", name: "blogDetail", component: BlogDetailPage },
   { path: "/blog", name: "blog", component: BlogPage },
   { path: "/menu", name: "menu", component: MenuPage },
+  { path: "/menu/:id", name: "menuDetail", component: MenuDetailPage },
   { path: "/reservation", name: "makeReservation", component: ReservationPage },
   { path: "/auth", name: "Authenticate", component: AuthenticatePage },
   { path: "/reg", name: "Register", component: RegisterPage },
+  { path: "/cart", name: "Cart", component: CartPage },
   {
     path: "/account",
     name: "editAccount",

@@ -19,11 +19,23 @@ import TopNavBar from "./components/TopNavBar.vue";
 //import HomePage from './pages/HomePage.vue'
 export default {
   name: "App",
+  data() {
+    return {
+      cart: {},
+    }
+  },
+  provide() {
+    // use function syntax so that we can access `this`
+    return {
+      cart: this.cart,
+      updateCart: (newCart)=>{this.cart = newCart;},
+    }
+  },
   components: {
     Footer,
     TopNavBar,
     AdminNavBar,
-  },
+  },  
 };
 </script>
 
