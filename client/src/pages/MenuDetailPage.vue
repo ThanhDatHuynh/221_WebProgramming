@@ -15,7 +15,6 @@
         <div class="btn-wrapper d-flex flex-wrap justify-center">
             <Button @onClick="handleBtnClick" text="Add To Cart" width="148px" height="53px"  v-show="user != null"/>
         </div>
-        {{ this.cart }}
     </div>
 </template>
 
