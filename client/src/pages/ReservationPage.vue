@@ -169,7 +169,7 @@ export default {
           //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pbmgxMjM0NTYiLCJpZCI6IjEiLCJtYW5hZ2VyIjoiMSIsImV4cCI6MTYzOTIxMTI2OX0.r8CwtgUQcMg8TjstE8EhmbZMFOD6jKB6hT4T-WHyc3A",
         },
       };
-
+  
       $.ajax(settings).done(function(response) {
         response = JSON.parse(JSON.stringify(JSON.parse(response)));
         __this.$refs.note.style.display = "flex";
