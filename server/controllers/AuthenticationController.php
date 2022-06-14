@@ -9,6 +9,13 @@ use Middleware\FormMiddleware as FormMiddleware;
 
 class AuthenticationController
 {
+  public function check_block_user($email) {
+    $db = DB::getInstance();
+    $sql = "select * from black_list where email = '$email'";
+    $row = mysqli_query($db, $sql);
+    if ($row->num_rows > 0) return true;
+    return false; 
+  }
   public function register()
   {
     $payload = ['email', 'password', 'username', 'phoneNumber', 'avatar', 'verify_password'];
@@ -17,6 +24,11 @@ class AuthenticationController
 
     if ($check) {
       $email = $_POST['email'];
+      if ($this->check_block_user($email)) {
+        echo json_encode(['message' => 'You are in black list', 'status' => 400]);
+        return;
+      }
+
       $password = $_POST['password'];
       $verify_password = $_POST['verify_password'];
       $username = $_POST['username'];
@@ -90,7 +102,10 @@ class AuthenticationController
 
       if ($result->num_rows > 0) {
         $row = mysqli_fetch_assoc($result);
-
+        if ($this->check_block_user($row['email'])) {
+          echo json_encode(['message' => 'You are in black list', 'status' => 400]);
+          return;
+        }
         if (password_verify($password, $row['password'])) {
           $user = new user_model($row['id'], $row['email'], $row['password'], $row['username'], $row['phoneNumber'], $row['avatar'], $row['manager']);
           $payload = [
@@ -99,6 +114,7 @@ class AuthenticationController
             'manager' => $user->manager,
             'exp' => time() + 60 * 60 * 24 * 30,
           ];
+          
           $token = $auth->generateJWT($payload);
 
           $user->password = '';

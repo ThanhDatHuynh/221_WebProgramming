@@ -10,7 +10,9 @@
           {{ items[1] }}
         </v-col>
         <v-col :style="[element, secondary]">
-          {{ items[2] }}
+
+          <div v-if="items[2].length > 10">{{ items[2].slice(0, 10) + "..." }}</div>
+          <div v-else>{{ items[2] }}</div>
         </v-col>
         <v-col :style="[element, secondary]">
           {{ items[3] }}
@@ -20,7 +22,17 @@
           <div v-else>User</div>
         </v-col>
         <v-col>
-          <Button :style="[element]" text="Delete" :width="'96px'" :height="'27px'" @onClick="handleSubmit" />
+          <div v-if="items[4] != '1'">
+            <Button :style="[element]" text="Delete" :width="'96px'" :height="'27px'" @onClick="handleSubmit" />
+          </div>
+          <div v-else></div>
+        </v-col>
+        <v-col>
+          <div v-if="items[4] != '1'">
+            <Button :style="[element]" :text="items[5] == true ? 'Unblock' : 'Block'" :width="'96px'" :height="'27px'"
+              @onClick="handleBlock" />
+          </div>
+          <div v-else></div>
         </v-col>
       </v-row>
     </v-container>
@@ -48,6 +60,12 @@
             <Button width="96px" height="27px" text="White Button" />
           </div>
         </v-col>
+        <v-col>
+          <div class="add-btn ">
+            <Button width="96px" height="27px" text="White Button" />
+          </div>
+        </v-col>
+
       </v-row>
     </v-container>
 
@@ -141,11 +159,15 @@ export default {
     handleSubmit() {
       this.$emit("onSubmit");
     },
+    handleBlock() {
+      this.$emit("onBlock");
+    }
   },
   data() {
     return {
       style: {
-        margin: "20px auto",
+        margin: "10px auto",
+        minWidth: "90vw",
         width: this.width,
         height: this.height,
         borderRadius: "20px",
@@ -156,6 +178,7 @@ export default {
       },
       styleHeader: {
         margin: "10px auto",
+        minWidth: "90vw",
         width: this.width,
         height: this.height,
         borderRadius: "20px",
@@ -169,7 +192,7 @@ export default {
       },
       primary: {
         fontFamily: "Roboto",
-        fontSize: "18px",
+        fontSize: "16px",
         fontWeight: "700",
         color: "#2a4365",
       },

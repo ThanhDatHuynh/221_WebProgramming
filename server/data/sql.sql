@@ -49,3 +49,6 @@ create table comment (
     foreign key(blogId) references blog(id),
     description varchar(1000) not null
 );
+create table black_list(
+	email varchar(100) primary key
+);

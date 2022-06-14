@@ -12,6 +12,76 @@ use Middleware\FormMiddleware as FormMiddleware;
 
 class AdminController
 {
+  public function getBlockUsers() {
+    if (!$this->checkAdminRole()) {
+      echo json_encode(["message" => "Invalid action. You are not admin", 'status' => 403]);
+      return;
+    }
+    $list = [];
+    $db = Db::getInstance();
+    $sql = 'SELECT * FROM black_list';
+    $result = mysqli_query($db, $sql);
+    if ($result->num_rows > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        $list[] = $row['email'];
+      }
+      echo json_encode(['response' => $list, 'status' => 200]);
+    } else {
+      echo json_encode(['message' => "Server or database is error", 'status' => 500]);
+    }
+  }
+  public function blockUser() {
+    if (!$this->checkAdminRole()) {
+      echo json_encode(["message" => "Invalid action. You are not admin", 'status' => 403]);
+      return;
+    }
+    $payload = ['email'];
+    $formValid = new FormMiddleware();
+    $check = $formValid->checkFullFields($payload);
+    if ($check) {
+      $email = $_POST['email'];
+      $db = Db::getInstance();
+      $sql = "insert into black_list values('$email')";
+      $row = mysqli_query($db, $sql);
+      if ($row) {
+        echo json_encode(["message" => "Successfully!", 'status' => 200]);
+      }
+      else {
+        echo json_encode(["message" => "Server of database is error", 'status' => 500]);
+      }
+    }
+    else {
+      echo json_encode(['message' => "Missing some fields", 'status' => 400]);
+    }
+  }
+
+  public function unblockUser() {
+    if (!$this->checkAdminRole()) {
+      echo json_encode(["message" => "Invalid action. You are not admin", 'status' => 403]);
+      return;
+    }
+    $payload = ['email'];
+    $formValid = new FormMiddleware();
+    $check = $formValid->checkFullFields($payload);
+    if ($check) {
+      $email = $_POST['email'];
+      $db = Db::getInstance();
+      $sql = "delete from black_list where email = '$email'";
+      $row = mysqli_query($db, $sql);
+      if ($row) {
+        echo json_encode(["message" => "Successfully!", 'status' => 200]);
+      }
+      else {
+        echo json_encode(["message" => "Server of database is error", 'status' => 500]);
+      }
+    }
+    else {
+      echo json_encode(['message' => "Missing some fields", 'status' => 400]);
+    }
+  }
+
+
+
   public function checkAdminRole()
   {
     $authMiddleware = new AuthMiddleware();
