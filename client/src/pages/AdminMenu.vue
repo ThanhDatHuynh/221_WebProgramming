@@ -6,7 +6,7 @@
         :width="'95vw'"
         :height="'100px'"
         :imgSize="'70px'"
-        :items="['ID', 'Name', 'Image', 'Description']"
+        :items="['ID', 'Name', 'Image', 'Description', 'Price']"
         @onSubmit="toggleAddBtn"
         to="/admin/user"
       />
@@ -14,7 +14,7 @@
     <div class="d-flex flex-wrap justify-center">
       <div
         v-for="dish in dishes.filter(
-          (_, index) => index >= (page - 1) * 6 && index <= page * 6 - 1
+          (_, index) => index >= (page - 1) * 5 && index <= page * 5 - 1
         )"
         :key="dish.id"
       >
@@ -23,7 +23,7 @@
           :width="'95vw'"
           :height="'100px'"
           :imgSize="'70px'"
-          :items="[dish.id, dish.name, dish.image, dish.description]"
+          :items="[dish.id, dish.name, dish.image, dish.description, dish.price]"
           @onSubmit="toggleDeleteBtn(dish.id)"
         />
       </div>
@@ -34,9 +34,9 @@
         v-model="modelPage"
         color="#e1651f"
         :length="
-          dishes.length % 6 === 0
-            ? Math.floor(dishes.length / 6)
-            : Math.floor(dishes.length / 6) + 1
+          dishes.length % 5 === 0
+            ? Math.floor(dishes.length / 5)
+            : Math.floor(dishes.length / 5) + 1
         "
         circle
       ></v-pagination>

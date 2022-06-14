@@ -1,12 +1,12 @@
 <template>
-    <div>
+    <div style="min-height:60%;">
         <div class="d-flex flex-wrap justify-center">
             <AdminItem
                 type="UserHeader"
                 :width="'100vw'"
                 :height="'100px'"
                 :imgSize="'70px'"
-                :items="['ID', 'Name', 'Email', 'Phone']"
+                :items="['ID', 'Name', 'Email', 'Phone', 'Manager']"
             /> 
         </div>
         <div class="d-flex flex-wrap justify-center">
@@ -16,7 +16,7 @@
                     :width="'100vw'"
                     :height="'100px'"
                     :imgSize="'70px'"
-                    :items="[user.id, user.username, user.email, user.phoneNumber]"
+                    :items="[user.id, user.username, user.email, user.phoneNumber, user.manager]"
                     @onSubmit="toggleDeleteBtn(user.id)"
                 /> 
             </div>
@@ -85,7 +85,6 @@ export default {
                     "Bear-Token": localStorage.getItem("UserToken"),
                 },
             };
-
             $.ajax(settings)
                 .done(function(response) {
                     const a = JSON.parse(response).response;

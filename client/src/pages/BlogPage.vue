@@ -103,7 +103,7 @@ export default {
 .buttonCreate {
   display: flex;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: center;
 }
 .buttonSize {
   width: 300px;

@@ -194,6 +194,15 @@
         :value="data.dishDescription"
         :errorMessage="errorMessages.dishDescription"
       />
+      <ControlField
+        @onInputChange="handleFormChange($event, 'dishPrice')"
+        type="DishDescription"
+        label="Price"
+        width="100%"
+        rows="2"
+        :value="data.dishPrice"
+        :errorMessage="errorMessages.dishPrice"
+      />
       <Button
         @onClick="handleSumbit"
         text="Confirm"

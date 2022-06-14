@@ -1,40 +1,26 @@
 <template>
   <div v-if="!isLoading" id="blog-detail">
     <v-container>
-      <v-layout align-center justify-space-around>
-        <h1>{{ item.blog.title }}</h1>
-        <v-btn
-          v-show="manager == '1'"
-          @click="this.deletePost"
-          width="7vw"
-          height="2.5vw"
-          color="#e1651f"
-        >
-          <span class="linkText">Delete</span>
-        </v-btn>
-        <v-btn
-          v-show="manager == '1'"
-          @click="this.routeToEditBlog"
-          width="7vw"
-          height="2.5vw"
-          color="#e1651f"
-        >
-          <span class="linkText">Edit</span>
-        </v-btn>
+      <v-layout align-center justify-space-around style="flex-wrap:wrap">
+        <h1 class="text-center mt-10">{{ item.blog.title }}</h1>
+        <div style="width:100%;display:flex;justify-content:center; margin: 20px 0px 20px 0;">
+          <v-btn v-show="manager == '1'" @click="this.deletePost" width="7vw" height="2.5vw" color="#e1651f">
+            <span class="linkText">Delete</span>
+          </v-btn>
+          <div style="width:5%"></div>
+          <v-btn v-show="manager == '1'" @click="this.routeToEditBlog" width="7vw" height="2.5vw" color="#e1651f">
+            <span class="linkText">Edit</span>
+          </v-btn>
+        </div>
       </v-layout>
       <v-layout align-center justify-center>
-        <v-img
-          max-height="30vw"
-          max-width="100vw"
-          :src="item.blog.image"
-        ></v-img>
+        <v-img max-height="30vw" max-width="70vw" :src="item.blog.image" style="border-radius:10px;"></v-img>
       </v-layout>
     </v-container>
 
     <div class="blogContent">
       <h3>WRITTEN ON {{ item.blog.date }}</h3>
-
-      <paragraph :content="item.blog.content"></paragraph>
+      <paragraph class="text-justify" :content="item.blog.content"></paragraph>
     </div>
 
     <div class="reply">
@@ -134,6 +120,7 @@ export default {
 .blogContent {
   padding: 5vw;
 }
+
 .reply {
   padding: 0vw 5vw 5vw 5vw;
 }
@@ -142,6 +129,7 @@ export default {
   color: white;
   font-size: 1vw;
 }
+
 .title {
   min-height: 70px;
 }

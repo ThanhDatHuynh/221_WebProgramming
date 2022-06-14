@@ -41,7 +41,7 @@ class AdminController
       $image = $_POST['image'];
       $price = $_POST['price'];
       $db = Db::getInstance();
-      $sql = "Insert into dish (name,description,image) Values ('$name','$description','$image', $price)";
+      $sql = "Insert into dish (name,description,image,price) Values ('$name','$description','$image', $price)";
       $row = mysqli_query($db, $sql);
       $id = mysqli_insert_id($db);
 
@@ -58,32 +58,30 @@ class AdminController
 
   public function updateDish($param)
   {
+
     if (!$this->checkAdminRole()) {
       echo json_encode(["message" => "Invalid action. You are not admin", 'status' => 403]);
       return;
     }
-
     $payload = ['name', 'description', 'image', 'price'];
     $formValid = new FormMiddleware();
     $check = $formValid->checkFullFields($payload);
-
     if ($check) {
       $id = substr($param, 1, -1);
-
       $db = Db::getInstance();
       $sql = "select * from dish where id = $id";
       $row = mysqli_query($db, $sql);
-
       if ($row->num_rows > 0) {
         $name = $_POST['name'];
         $description = $_POST['description'];
         $image = $_POST['image'];
         $price = $_POST['price'];
-        $sql = "Update dish set name = '$name', description = '$description', image = '$image', price = $price where id = $id";
-        $row = mysqli_query($db, $sql);
 
+        $sql = "Update dish set name = '$name', description = '$description', image = '$image', price = $price where id = $id";
+
+        $row = mysqli_query($db, $sql);
         if ($row) {
-          $dish = new dish_model($id, $name, $description, $image);
+          $dish = new dish_model($id, $name, $description, $image, $price);
           echo json_encode(["response" => $dish, 'status' => 200]);
         } else {
           echo json_encode(["message" => "Server of database is error", 'status' => 500]);

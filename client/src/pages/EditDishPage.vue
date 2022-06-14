@@ -57,12 +57,14 @@ export default {
         imageUrl: "",
         dishTitle: "",
         dishDescription: "",
+        dishPrice: ""
       },
       errorMessages: {
         dishId: "",
         imageUrl: "",
         dishTitle: "",
         dishDescription: "",
+        dishPrice: ""
       },
 
       // Add field with name in errorMessages for others' validation
@@ -87,7 +89,7 @@ export default {
 
     GetDishData() {
       var settings = {
-        url: `${process.env.VUE_APP_API_URL}/dish/{${this.currentDishId}}`,
+        url: `${process.env.VUE_APP_API_URL}/menu/{${this.currentDishId}}`,
         method: "GET",
         timeout: 0,
         data: {},
@@ -102,6 +104,7 @@ export default {
           this.formData.imageUrl = dish.image;
           this.formData.dishTitle = dish.name;
           this.formData.dishDescription = dish.description;
+          this.formData.dishPrice = dish.price;
         } else {
           alert("Cannot get dish to edit");
         }
@@ -150,6 +153,7 @@ export default {
             image: formData.imageUrl,
             name: formData.dishTitle,
             description: formData.dishDescription,
+            price: formData.dishPrice
           },
           headers: {
             "Bear-Token": UserToken,
@@ -177,6 +181,7 @@ export default {
             image: formData.imageUrl,
             name: formData.dishTitle,
             description: formData.dishDescription,
+            price: formData.dishPrice
           },
           headers: {
             "Bear-Token": UserToken,
