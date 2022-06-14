@@ -12,9 +12,18 @@
       </div>
     </div>
     <div class="d-flex flex-wrap justify-center">
-      <div v-for="dish in dishes" :key="dish.id">
+      <div v-for="dish in dishes.filter(
+        (_, index) => index >= (page - 1) * 8 && index <= page * 8 - 1
+      )" :key="dish.id">
         <Dish :dish="dish" />
       </div>
+    </div>
+    <div class="text-center">
+      <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
+        dishes.length % 8 === 0
+          ? Math.floor(dishes.length / 8)
+          : Math.floor(dishes.length / 8) + 1
+      " circle></v-pagination>
     </div>
     <div class="btn-wrapper d-flex justify-center">
       <div>
@@ -36,6 +45,7 @@ export default {
   },
   data() {
     return {
+      page: 1, // default page
       dishes: [],
     };
   },
@@ -47,7 +57,7 @@ export default {
         method: "GET",
         timeout: 0,
       };
-      
+
       $.ajax(settings)
         .done(function (response) {
           const a = JSON.parse(response).response;
@@ -56,6 +66,15 @@ export default {
     },
     handleBookBtnClick() {
       this.$router.push({ name: "makeReservation" });
+    },
+  }, computed: {
+    modelPage: {
+      get() {
+        return this.page;
+      },
+      set(value) {
+        this.page = value;
+      },
     },
   },
   beforeMount() {
