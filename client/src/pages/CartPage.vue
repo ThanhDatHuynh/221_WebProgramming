@@ -8,38 +8,48 @@
         <div v-if="data.length > 0">
             <div>
                 <div v-for="food in this.data" :key="food.id" class="row align-items-center justify-center rounded"
-                    :v-show="cart[food.id] >= 0" style="background-color:#f2f2f2; margin:5px">
+                    :v-show="cart[food.id] && cart[food.id] >= 0" style="background-color:#f2f2f2; margin:5px">
                     <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center">{{ food.name }}</div>
                     <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center"><img :src="food.image"
                             style="max-width:100px; border-radius:5px" /></div>
                     <div class="col-1 text-center" style="flex-wrap:wrap; align-self:center">
-                        <span @click="() => decrFoodQuantity(food.id)">
+                        <button @click="() => decrFoodQuantity(food.id)">
                             <font-awesome-icon icon="fa-solid fa-circle-minus" />
-                        </span>
+                        </button>
                     </div>
                     <div class="col-1 text-center" style="flex-wrap:wrap; align-self:center">
                         {{ cart[food.id] }}
                     </div>
                     <div class="col-1 text-center" style="flex-wrap:wrap; align-self:center">
-                        <span @click="() => incrFoodQuantity(food.id)">
+                        <button @click="() => incrFoodQuantity(food.id)">
                             <font-awesome-icon icon="fa-solid fa-circle-plus" />
-                        </span>
+                        </button>
                     </div>
                     <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center">{{ food.price *
-                            cart[food.id]
+                    cart[food.id]
                     }} $</div>
                 </div>
             </div>
             <div>
                 <div class="row align-items-center justify-center rounded" style="background-color:#f2f2f2; margin:5px">
-                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center">Total:</div>
-                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center"></div>
-                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center"></div>
-                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center">{{ data.reduce((result,
-                            food) => result + (food.price * cart[food.id]), 0)
+                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center; font-weight:bold">Total:
+                    </div>
+                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center; font-weight:bold"></div>
+                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center; font-weight:bold"></div>
+                    <div class="col-3 text-center" style="flex-wrap:wrap; align-self:center; font-weight:bold">{{
+                    data.reduce((result,
+                    food) => result + (food.price * cart[food.id]), 0)
                     }}$</div>
                 </div>
             </div>
+            <div class="btn-wrapper d-flex flex-wrap justify-center">
+                <Button @onClick="$vm2.open('modal-2')" text="Order" width="148px" height="53px" />
+            </div>
+            <modal-vue @on-close="onCloseModal" name="modal-2" :headerOptions="{
+                title: 'Notification',
+            }" noFooter>
+                <p class="text-center">Order successfully!</p>
+            </modal-vue>
         </div>
         <div v-else>
             <div class="title-wrapper">
@@ -53,7 +63,7 @@
 
 
 <script>
-//import Button from "../components/Button";
+import Button from "../components/Button";
 
 import $ from "jquery";
 // import Dish from "../components/Dish.vue";
@@ -61,11 +71,10 @@ import $ from "jquery";
 export default {
     name: "MenuDetailPage",
     components: {
-        //Button,
+        Button,
     },
     data() {
         return {
-            localCart: {}, // for update
             data: {},
         };
     },
@@ -96,8 +105,6 @@ export default {
                         return this.cart[food.id] && this.cart[food.id] > 0;
                     });
                 }
-                this.cart = currentCart;
-                this.localCart = this.cart;
                 this.updateCart(currentCart);
             }
             this.$forceUpdate()
@@ -105,13 +112,19 @@ export default {
         incrFoodQuantity(key) {
             let currentCart = this.cart;
             ++currentCart[key];
-            this.cart = currentCart;
-            this.localCart = this.cart;
             this.updateCart(currentCart);
             this.$forceUpdate();
         },
+        async onCloseModal() {
+            // await this.resetCart(); // Flush
+            this.$vm2.close('modal-2');
+            let currentCart = this.cart;
+            for (var entry in currentCart) delete currentCart[entry];
+            this.updateCart(currentCart);
+            this.$router.push("/menu");
+        }
     },
-    inject: ['cart', 'updateCart'],
+    inject: ['cart', 'updateCart', 'resetCart'],
     beforeMount() {
         this.getData();
     },
@@ -120,6 +133,16 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
+
+button {
+    transition: transform .1.5s;
+    /* Animation */
+}
+
+button:hover {
+    transform: scale(1.5);
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
 
 .title-wrapper {
     margin-bottom: 4%;

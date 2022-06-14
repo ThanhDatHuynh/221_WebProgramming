@@ -5,9 +5,13 @@ import App from './App.vue'
 // import storeConfig from './store'
 import routes from './routes'
 import vuetify from './plugin/vuetify'
-
+import Modal from "@burhanahmeed/vue-modal-2";
+Vue.use(Modal, {
+  componentName: "ModalVue"
+});
 Vue.use(Vuex)
 Vue.use(VueRouter)
+
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'
 

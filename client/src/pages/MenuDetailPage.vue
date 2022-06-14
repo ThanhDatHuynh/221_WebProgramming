@@ -9,8 +9,11 @@
         <div class="text-center">
             <img :src="this.data.image" style="border-radius:10px;" />
         </div>
-        <div class="text-center my-15" style="font-size:20px">
+        <div class="text-center my-5" style="font-size:20px">
             <p>{{ this.data.description }}</p>
+        </div>
+        <div class="text-center my-5" style="font-size:20px; font-weight:bold">
+            <p>Price: {{ this.data.price }} $</p>
         </div>
         <div class="btn-wrapper d-flex flex-wrap justify-center">
             <Button @onClick="handleBtnClick" text="Add To Cart" width="148px" height="53px"  v-show="user != null"/>
@@ -86,8 +89,9 @@ export default {
 .menu-title {
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
-    font-size: 500%;
+    font-size: 400%;
     margin: 2% 0% -1% 0%;
+    font-weight: bold;
 }
 
 .menu-description {

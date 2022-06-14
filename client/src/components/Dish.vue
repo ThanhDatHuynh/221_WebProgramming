@@ -1,9 +1,10 @@
 <template>
   <v-card 
   :to="'/menu/' + dish.id"
-  class="mx-8 my-10" 
+  class="mx-8 my-10 zoom-out" 
   width="330" 
-  height="400">
+  height="400"
+  >
     <div>
       <v-img height="220" :src="dish.image" />
     </div>
@@ -27,6 +28,12 @@ export default {
 @import url("//db.onlinewebfonts.com/c/c8e8fcd5d85d9b587022fe0a79809b73?family=Friz+Quadrata");
 .dish-container {
   padding: 4% 8% 0% 8%;
+}
+.zoom-out {
+      transition: transform .1.5s; /* Animation */
+}
+.zoom-out:hover {
+  transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 .dish-title,
 .dish-description,

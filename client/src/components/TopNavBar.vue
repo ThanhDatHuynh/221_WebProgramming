@@ -69,6 +69,13 @@ export default {
 </script>
 
 <style scoped>
+span {
+      transition: transform .1.5s; /* Animation */
+}
+span:hover {
+  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
 .together {
   min-width: 0;
 }

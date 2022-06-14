@@ -29,6 +29,7 @@ export default {
     return {
       cart: this.cart,
       updateCart: (newCart)=>{this.cart = newCart;},
+      resetCart: ()=>{this.cart = {};}
     }
   },
   components: {
@@ -46,4 +47,11 @@ export default {
 .custom_footer {
   /* margin-top: auto; */
 }
+button {
+      transition: transform .1.5s; /* Animation */
+}
+button:hover {
+  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
 </style>
