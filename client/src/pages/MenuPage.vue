@@ -23,7 +23,8 @@
         dishes.length % 8 === 0
           ? Math.floor(dishes.length / 8)
           : Math.floor(dishes.length / 8) + 1
-      " circle></v-pagination>
+      " circle>
+      </v-pagination>
     </div>
     <div class="btn-wrapper d-flex justify-center">
       <div>
