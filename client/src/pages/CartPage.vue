@@ -133,6 +133,7 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 button {
     transition: transform .1.5s;
@@ -156,8 +157,8 @@ button:hover {
 }
 
 .menu-description {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Hahmlet';*/
     text-align: center;
     margin: 0% 8% -1% 8%;
 }

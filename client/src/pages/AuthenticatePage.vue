@@ -57,27 +57,11 @@ export default {
         password: "",
       },
       schema: yup.object().shape({
-        email: yup.string().email().label("Email"),
-        phone: yup
-          .string()
-          .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
-        date: yup
-          .string()
-          .matches(
-            /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/,
-            "Date must be of YYYY-MM-DD"
-          ),
-        time: yup
-          .string()
-          .matches(
-            /(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/gm,
-            "Time must be of HH:MM:SS"
-          ),
-        totalPeople: yup.number().min(1).max(30).label("Number of persons"),
+        username: yup.string().min(1).label("Username"),
+        password: yup.string().min(5).label("Password"),
       }),
     };
   },
-
   methods: {
     handleFormChange(newData) {
       this.formData[newData.name] = newData.value;
@@ -96,8 +80,10 @@ export default {
         });
       if (validationResult.errors) {
         this.errorMessages[name] = validationResult.errors[0];
+        return false;
       } else {
         this.errorMessages[name] = "";
+        return true;
       }
     },
     reloadPage() {
@@ -106,7 +92,12 @@ export default {
       this.$router.go("/");
     },
 
-    Login() {
+    async Login() {
+      let usernameOK = await this.handleInputValidation({name: "username", value: this.formData.username}) 
+      //let phoneOK = await this.handleInputValidation({name: "phone", value: __this.formData.phone}) 
+      //let emailOK = await this.handleInputValidation({name: "email", value: __this.formData.email})      
+      let passwordOK = await this.handleInputValidation({name: "password", value: this.formData.password})
+      if (!usernameOK || !passwordOK) return;
       var __this = this;
       var settings = {
         url: `${process.env.VUE_APP_API_URL}/auth/login`,
@@ -168,7 +159,7 @@ export default {
 }
 
 .note-title {
-  font-family: Oleo Script Swash Caps;
+  font-family: Roboto, 'san-serif';
   text-align: center;
   font-size: 200%;
   margin: 20px 0 20px 0;

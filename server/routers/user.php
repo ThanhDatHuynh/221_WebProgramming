@@ -4,6 +4,7 @@
    $router->get('/dish/{id}', 'UserController@getDishDetail');
    $router->get('/menu', 'UserController@getMenu');
    $router->get('/menu/{id}', 'UserController@getMenuDetail');
+   $router->get('/get_public_info', 'UserController@getPublicInfo');
    $router->post('/reservation', 'UserController@reservation');
    
    $router->post('/comment/create', 'UserController@createComment');

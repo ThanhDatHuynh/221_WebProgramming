@@ -1,34 +1,19 @@
 <template>
   <div class="edit-dish-wrapper">
-    <ModalConfirm
-      @toggleModalEvent="toggleModalOpen('createDish')"
-      :isOpen="this.isCreateDishModalOpen"
-      :title="'Create Dish Confirm'"
-      :content="'You are about to create new dish'"
-      @callbackEvent="handleSubmit"
-    />
-    <ModalConfirm
-      @toggleModalEvent="toggleModalOpen('editDish')"
-      :isOpen="this.isEditDishModalOpen"
-      :title="'Edit Dish Confirm'"
-      :content="'You are about to edit your dish'"
-      @callbackEvent="handleSubmit"
-    />
+    <ModalConfirm @toggleModalEvent="toggleModalOpen('createDish')" :isOpen="this.isCreateDishModalOpen"
+      :title="'Create Dish Confirm'" :content="'You are about to create new dish'" @callbackEvent="handleSubmit" />
+    <ModalConfirm @toggleModalEvent="toggleModalOpen('editDish')" :isOpen="this.isEditDishModalOpen"
+      :title="'Edit Dish Confirm'" :content="'You are about to edit your dish'" @callbackEvent="handleSubmit" />
     <div class="reservation-title">
       <p>Create/Edit Dish</p>
     </div>
     <div class="form-wrapper">
-      <Form
-        :type="'EditDish'"
-        :data="formData"
-        :errorMessages="errorMessages"
-        @onFormChange="handleFormChange"
+      <Form :type="'EditDish'" :data="formData" :errorMessages="errorMessages" @onFormChange="handleFormChange"
         @onSubmit="
           $route.name === 'adminCreateDish'
             ? toggleModalOpen('createDish')
             : toggleModalOpen('editDish')
-        "
-      />
+        " />
       <div v-show="isFormSubmited" class="reservation-note" ref="note">
         <div ref="noteTitle" class="note-title"></div>
       </div>
@@ -68,7 +53,12 @@ export default {
       },
 
       // Add field with name in errorMessages for others' validation
-      schema: yup.object().shape({}),
+      schema: yup.object().shape({
+        dishId: yup.string(),
+        imageUrl: yup.string().url().min(1).label("Image URL"),
+        dishTitle: yup.string().min(1).label("Tital"),
+        dishPrice: yup.string().min(1).label("Price")
+      }),
     };
   },
   beforeMount() {
@@ -119,8 +109,10 @@ export default {
         });
       if (validationResult.errors) {
         this.errorMessages[name] = validationResult.errors[0];
+        return false;
       } else {
         this.errorMessages[name] = "";
+        return true;
       }
     },
 
@@ -129,8 +121,18 @@ export default {
       this.handleInputValidation(newData);
     },
 
-    handleSubmit() {
+    async handleSubmit() {
       var __this = this;
+      let dishIdOK = await this.handleInputValidation({name: "dishId", value: __this.formData.dishId});
+      let imageUrlOK = await this.handleInputValidation({name: "imageUrl", value: __this.formData.imageUrl});
+      let dishTitleOK = await this.handleInputValidation({name: "dishTitle", value: __this.formData.dishTitle});
+      let dishPriceOK = await this.handleInputValidation({name: "dishPrice", value: __this.formData.dishPrice});
+      if (!dishIdOK || !imageUrlOK || !dishTitleOK || !dishPriceOK) {
+        this.toggleModalOpen("createDish");
+        return;
+      }
+      
+      
       const formData = JSON.parse(JSON.stringify(this.formData));
 
       const UserToken = localStorage.getItem("UserToken");
@@ -159,7 +161,8 @@ export default {
             "Bear-Token": UserToken,
           },
         };
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
+          console.log(response);
           response = JSON.parse(response);
           if (response.status == 200) {
             __this.$refs.noteTitle.innerHTML = "Your Dish Have Been Created";
@@ -187,7 +190,7 @@ export default {
             "Bear-Token": UserToken,
           },
         };
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
           response = JSON.parse(response);
           if (response.status == 200) {
             __this.$refs.noteTitle.innerHTML = "Your Dish Have Been Edited";
@@ -206,12 +209,14 @@ export default {
 .edit-dish-wrapper {
   margin: 50px 0 50px 0;
 }
+
 .reservation-title {
   font-family: Oleo Script Swash Caps;
   text-align: center;
   font-size: 500%;
   margin: 0px 0px 50px 0px;
 }
+
 .reservation-note {
   margin: 20px auto;
   width: 100%;
@@ -223,12 +228,12 @@ export default {
   flex-wrap: wrap;
 }
 
-.reservation-note > * {
+.reservation-note>* {
   width: 100%;
 }
 
 .note-title {
-  font-family: Oleo Script Swash Caps;
+  font-family: Roboto, 'san-serif';
   text-align: center;
   font-size: 200%;
   margin: 20px 0 20px 0;

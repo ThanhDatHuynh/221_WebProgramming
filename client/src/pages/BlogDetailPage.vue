@@ -18,9 +18,9 @@
       </v-layout>
     </v-container>
 
-    <div class="blogContent">
+    <div class="blog-content">
       <h3>WRITTEN ON {{ item.blog.date }}</h3>
-      <paragraph class="text-justify" :content="item.blog.content"></paragraph>
+      <paragraph class="text-justify" style='font-family: "Roboto", "sans-serif";' :content="item.blog.content"></paragraph>
     </div>
 
     <div class="reply">
@@ -117,8 +117,11 @@ export default {
 </script>
 
 <style scoped>
-.blogContent {
+@import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+.blog-content {
   padding: 5vw;
+  font-family: "Roboto", "sans-serif";
 }
 
 .reply {

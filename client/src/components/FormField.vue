@@ -80,7 +80,45 @@
       </template>
     </v-text-field>
   </div>
-
+  <div v-else-if="this.type === 'AddressIcon'" :style="[this.style]">
+    <v-text-field
+      background-color="white"
+      solo
+      outlined
+      :error-messages="errorMessage"
+      :value="value"
+      :placeholder="placeHolder"
+      :name="name"
+      no-resize
+      class="account-form-field"
+      @change="handleInputChange($event)"
+    >
+      <template v-slot:label>
+        <v-icon>mdi-home-outline</v-icon>
+        {{ label }}
+      </template>
+    </v-text-field>
+  </div>
+    <div v-else-if="this.type === 'TimeIcon'" :style="[this.style]">
+    <v-text-field
+      background-color="white"
+      solo
+      outlined
+      :error-messages="errorMessage"
+      :value="value"
+      :placeholder="placeHolder"
+      :name="name"
+      no-resize
+      class="account-form-field"
+      @change="handleInputChange($event)"
+      type="time"
+    >
+      <template v-slot:label>
+        <v-icon>mdi-clock-outline</v-icon>
+        {{ label }}
+      </template>
+    </v-text-field>
+  </div>
   <div v-else-if="this.type === 'PasswordNoLabel'" :style="[this.style]">
     <div :style="[styleLabel, styleLabelDish]">{{ label }}</div>
     <v-text-field
@@ -121,7 +159,46 @@
       {{ label }}
     </v-text-field>
   </div>
-
+  <div v-else-if="this.type === 'Time'" :style="[this.style]">
+    <v-text-field
+      type="time"
+      background-color="white"
+      solo
+      class="reservation-input"
+      :error-messages="errorMessage"
+      :value="value"
+      filled
+      rounded
+      dense
+      :label="label"
+      :placeholder="label"
+      :name="name"
+      no-resize
+      @change="handleInputChange($event)"
+    >
+      {{ label }}
+    </v-text-field>
+  </div>
+  <div v-else-if="this.type === 'Date'" :style="[this.style]">
+    <v-text-field
+      type="date"
+      background-color="white"
+      solo
+      class="reservation-input"
+      :error-messages="errorMessage"
+      :value="value"
+      filled
+      rounded
+      dense
+      :label="label"
+      :placeholder="label"
+      :name="name"
+      no-resize
+      @change="handleInputChange($event)"
+    >
+      {{ label }}
+    </v-text-field>
+  </div>
   <div v-else-if="this.type === 'NoIconMessage'" :style="[this.style]">
     <v-textarea
       background-color="white"

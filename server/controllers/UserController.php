@@ -14,6 +14,17 @@ use mysqli;
 
 class UserController
 {
+  public function getPublicInfo() {
+    $db = Db::getInstance();
+    $sql = 'SELECT * FROM public_infomation';
+    $result = mysqli_query($db, $sql);
+    if ($result->num_rows > 0) {
+      $row = mysqli_fetch_assoc($result);
+      echo json_encode(['response' => $row, 'status' => 200]);
+    } else {
+      echo json_encode(['message' => "Server or database is error", 'status' => 500]);
+    }
+  }
   public function updatePassword()
   {
     $authMiddleware = new AuthMiddleware();
@@ -358,9 +369,9 @@ class UserController
 
       $check = $formValid->emailValidator($email)
         && $formValid->lengthValidator(10, 10, $phoneNumber)
-        && $formValid->lengthValidator(1, 30, $name)
-        && $formValid->dateValidator($date)
-        && $formValid->timeValidator($time);
+        && $formValid->lengthValidator(1, 30, $name);
+        //&& $formValid->dateValidator($date)
+        //&& $formValid->timeValidator($time);
       if ($check) {
         $sql = "insert into reservation (name, email, phoneNumber, NoP, date, time, description) values('$name', '$email', '$phoneNumber', $NoP, '$date', '$time', '$description')";
         $result = mysqli_query($db, $sql);

@@ -14,9 +14,9 @@
       <div>
         <div class="menu-title text-center">Contact </div>
         <ul>
-          <li>Call: (+84) 123 456 789 </li>
-          <li> Address: 268 Ly Thuong Kiet, Phuong 14, Quan 10, Thanh pho Ho Chi Minh </li>
-          <li> Open Time: 10am - 11pm </li>
+          <li>Call: {{phone}}</li>
+          <li> Address: {{address}} </li>
+          <li> Open Time: From {{openTime}} to {{closeTime}} </li>
         </ul>
       </div>
       <div>
@@ -33,14 +33,43 @@
 
 <script>
 //import Button from "./Button.vue";
+import $ from "jquery";
 export default {
   components: {},
   name: "Footer",
+  methods: {
+    getPublicInfo() {
+      var settings = {
+        url: `${process.env.VUE_APP_API_URL}/get_public_info`,
+        method: "GET",
+        timeout: 0,
+        data: {},
+        headers: {},
+      };
+
+      $.ajax(settings).then((response) => {
+        const __this = this;
+        console.log(response);
+        response = JSON.parse(response).response;
+        __this.phone = response.phone;
+        __this.address = response.address;
+        __this.openTime = response.open_time;
+        __this.closeTime = response.close_time;
+      });
+    },
+  },
   data() {
     return {
+      phone:"",
+      address:"",
+      openTime:"",
+      closeTime:"",
       //userToken: localStorage.getItem("UserToken"),
     };
-  },
+  }, 
+  beforeMount() {
+    this.getPublicInfo();
+  }
 };
 </script>
 
@@ -76,21 +105,21 @@ export default {
 }
 
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
 
 .title-wrapper {
   margin-bottom: 4%;
 }
 
 .menu-title {
-  font-family: Oleo Script Swash Caps;
+  font-family: sans-serif;
   text-align: center;
   font-size: 250%;
   margin: 2% 0% -1% 0%;
 }
 
 .menu-description {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: sans-serif;
   text-align: center;
   margin: 0% 0% -1% 0%;
 }

@@ -2,6 +2,9 @@
   <v-container v-show="manager == '1'" fluid>
     <div class="d-flex">
       <div class="mr-auto"></div>
+      <v-btn depressed color="black" to="/admin/about" small>
+        <span class="linkText">About</span>
+      </v-btn>
       <v-btn depressed color="black" to="/admin/menu" small>
         <span class="linkText">Menu</span>
       </v-btn>

@@ -1,34 +1,19 @@
 <template>
   <div class="edit-blog-wrapper">
-    <ModalConfirm
-      @toggleModalEvent="toggleModalOpen('createBlog')"
-      :isOpen="this.isCreateBlogModalOpen"
-      :title="'Create Blog Confirm'"
-      :content="'You are about to create new blog'"
-      @callbackEvent="handleSubmit"
-    />
-    <ModalConfirm
-      @toggleModalEvent="toggleModalOpen('editBlog')"
-      :isOpen="this.isEditBlogModalOpen"
-      :title="'Edit Blog Confirm'"
-      :content="'You are about to edit your blog'"
-      @callbackEvent="handleSubmit"
-    />
+    <ModalConfirm @toggleModalEvent="toggleModalOpen('createBlog')" :isOpen="this.isCreateBlogModalOpen"
+      :title="'Create Blog Confirm'" :content="'You are about to create new blog'" @callbackEvent="handleSubmit" />
+    <ModalConfirm @toggleModalEvent="toggleModalOpen('editBlog')" :isOpen="this.isEditBlogModalOpen"
+      :title="'Edit Blog Confirm'" :content="'You are about to edit your blog'" @callbackEvent="handleSubmit" />
     <div class="reservation-title">
       <p>Create/Edit Blog</p>
     </div>
     <div class="form-wrapper">
-      <Form
-        :type="'EditBlog'"
-        :data="formData"
-        :errorMessages="errorMessages"
-        @onFormChange="handleFormChange"
+      <Form :type="'EditBlog'" :data="formData" :errorMessages="errorMessages" @onFormChange="handleFormChange"
         @onSubmit="
           $route.name === 'adminCreateBlog'
             ? toggleModalOpen('createBlog')
             : toggleModalOpen('editBlog')
-        "
-      />
+        " />
       <div v-show="isFormSubmited" class="reservation-note" ref="note">
         <div ref="noteTitle" class="note-title"></div>
       </div>
@@ -64,7 +49,10 @@ export default {
       },
 
       // Add field with name in errorMessages for others' validation
-      schema: yup.object().shape({}),
+      schema: yup.object().shape({
+        blogTitle: yup.string().min(10).label("Title"),
+        imageUrl: yup.string().url().min(0).label("Image URL"),
+      }),
     };
   },
   beforeMount() {
@@ -113,8 +101,10 @@ export default {
         });
       if (validationResult.errors) {
         this.errorMessages[name] = validationResult.errors[0];
+        return false;
       } else {
         this.errorMessages[name] = "";
+        return true;
       }
     },
 
@@ -123,7 +113,10 @@ export default {
       this.handleInputValidation(newData);
     },
 
-    handleSubmit() {
+    async handleSubmit() {
+      let titleOK = await this.handleInputValidation({ name: "blogTitle", value: this.formData.blogTitle });
+      let imageUrlOK = await this.handleInputValidation({ name: "imageUrl", value: this.formData.imageUrl });
+      if (!titleOK || !imageUrlOK) { this.toggleModalOpen("createBlog"); return; }
       var __this = this;
       const formData = JSON.parse(JSON.stringify(this.formData));
 
@@ -152,7 +145,7 @@ export default {
             "Bear-Token": UserToken,
           },
         };
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
           response = JSON.parse(response);
           if (response.status == 200) {
             __this.$refs.noteTitle.innerHTML = "Your Blog Have Been Created";
@@ -179,7 +172,7 @@ export default {
             "Bear-Token": UserToken,
           },
         };
-        $.ajax(settings).done(function(response) {
+        $.ajax(settings).done(function (response) {
           response = JSON.parse(response);
           if (response.status == 200) {
             __this.$refs.noteTitle.innerHTML = "Your Blog Have Been Edited";
@@ -198,12 +191,14 @@ export default {
 .edit-blog-wrapper {
   margin: 50px 0 50px 0;
 }
+
 .reservation-title {
   font-family: Oleo Script Swash Caps;
   text-align: center;
   font-size: 500%;
   margin: 0px 0px 50px 0px;
 }
+
 .reservation-note {
   margin: 20px auto;
   width: 100%;
@@ -215,12 +210,12 @@ export default {
   flex-wrap: wrap;
 }
 
-.reservation-note > * {
+.reservation-note>* {
   width: 100%;
 }
 
 .note-title {
-  font-family: Oleo Script Swash Caps;
+  font-family: Roboto, 'san-serif';
   text-align: center;
   font-size: 200%;
   margin: 20px 0 20px 0;

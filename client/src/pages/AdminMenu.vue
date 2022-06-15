@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="min-height:60vh">
     <div class="d-flex flex-wrap justify-center">
       <AdminItem
         type="DishHeader"

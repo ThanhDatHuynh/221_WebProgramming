@@ -315,7 +315,7 @@ export default {
 }
 
 .note-title {
-  font-family: Oleo Script Swash Caps;
+  font-family: Roboto, 'san-serif';
   text-align: center;
   font-size: 200%;
   margin: 20px 0 20px 0;

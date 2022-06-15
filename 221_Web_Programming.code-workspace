@@ -1,10 +1,13 @@
 {
 	"folders": [
 		{
-			"path": "../221_Web_Programming"
+			"path": "client"
 		},
 		{
 			"path": "../../XAMPP/lampp/htdocs"
+		},
+		{
+			"path": "server"
 		}
 	],
 	"settings": {}

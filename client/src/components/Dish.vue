@@ -43,11 +43,13 @@ export default {
 .dish-title {
   font-size: 24px;
   /* font-family: Oleo Script Swash Caps; */
-  font-weight: 500;
+  font-family: "Roboto", "sans-serif";
+  font-weight: 700;
 }
 .dish-description {
   font-size: 14px;
   color: #6a6a6a;
   letter-spacing: 0.5px;
+  font-family: "Roboto", "sans-serif";
 }
 </style>

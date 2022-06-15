@@ -8,8 +8,7 @@ create table dish (
 	id int auto_increment primary key,
     name varchar(50) not null,
     description varchar(2000) not null,
-    image varchar(200) not null,
-    price int
+    image varchar(200) not null
 );
 
 create table blog(
@@ -49,6 +48,9 @@ create table comment (
     foreign key(blogId) references blog(id),
     description varchar(1000) not null
 );
-create table black_list(
-	email varchar(100) primary key
+create table public_infomation(
+    phone varchar(500),
+    address varchar(500),
+    open_time varchar(500),
+    close_time varchar(500)
 );

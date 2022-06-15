@@ -12,13 +12,8 @@
       </div>
     </div>
     <div class="reservation-form-wrapper">
-      <Form
-        :type="'Reservation'"
-        :data="formData"
-        :errorMessages="errorMessages"
-        @onFormChange="handleFormChange"
-        @onSubmit="handleSubmit"
-      />
+      <Form :type="'Reservation'" :data="formData" :errorMessages="errorMessages" @onFormChange="handleFormChange"
+        @onSubmit="handleSubmit" />
     </div>
     <div :style="style" class="reservation-note" ref="note">
       <div ref="noteTitle" class="note-title"></div>
@@ -83,17 +78,9 @@ export default {
           .string()
           .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
         date: yup
-          .string()
-          .matches(
-            /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/,
-            "Date must be of YYYY-MM-DD"
-          ),
+          .string(),
         time: yup
-          .string()
-          .matches(
-            /(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/gm,
-            "Time must be of HH:MM:SS"
-          ),
+          .string(),
         totalPeople: yup
           .number()
           .min(1)
@@ -169,8 +156,8 @@ export default {
           //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik1pbmgxMjM0NTYiLCJpZCI6IjEiLCJtYW5hZ2VyIjoiMSIsImV4cCI6MTYzOTIxMTI2OX0.r8CwtgUQcMg8TjstE8EhmbZMFOD6jKB6hT4T-WHyc3A",
         },
       };
-  
-      $.ajax(settings).done(function(response) {
+
+      $.ajax(settings).done(function (response) {
         response = JSON.parse(JSON.stringify(JSON.parse(response)));
         __this.$refs.note.style.display = "flex";
         if (response.status == 200) {
@@ -188,23 +175,28 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
+
 .title-wrapper {
   margin-bottom: 4%;
 }
+
 .reservation-title {
   font-family: Oleo Script Swash Caps;
   text-align: center;
   font-size: 500%;
   margin: 2% 0% -1% 0%;
 }
+
 .reservation-description {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   text-align: center;
 }
+
 .reservation-form-wrapper {
   width: 100%;
 }
+
 .reservation-page-wrapper {
   display: flex;
   justify-content: center;
@@ -212,6 +204,7 @@ export default {
   width: 50%;
   margin: 0 auto;
 }
+
 .reservation-note {
   margin: 20px auto;
   width: 100%;
@@ -223,12 +216,12 @@ export default {
   flex-wrap: wrap;
 }
 
-.reservation-note > * {
+.reservation-note>* {
   width: 100%;
 }
 
 .note-title {
-  font-family: Oleo Script Swash Caps;
+  font-family: Roboto, 'san-serif';
   text-align: center;
   font-size: 200%;
   margin: 20px 0 20px 0;
@@ -245,11 +238,13 @@ export default {
     width: 70%;
   }
 }
+
 @media screen and (max-width: 1000px) {
   .reservation-page-wrapper {
     width: 80%;
   }
 }
+
 @media screen and (max-width: 800px) {
   .reservation-page-wrapper {
     width: 90%;

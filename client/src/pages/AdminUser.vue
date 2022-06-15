@@ -12,10 +12,10 @@
             </div>
         </div>
         <ModalConfirm @toggleModalEvent="toggleDeleteBtn()" :isOpen="this.isDeleteModalOpen" :title="'Are you sure ?'"
-            :content="'Do you want to delete this user ?'" @callbackEvent="deleteUser" />
+            :content="'Do you want to delete this user?'" @callbackEvent="deleteUser" />
 
         <ModalConfirm @toggleModalEvent="toggleBlockBtn()" :isOpen="this.isBlockModalOpen" :title="'Are you sure ?'"
-            :content="'Do you want to block this user ?'" @callbackEvent="blockUser" />
+            :content="'Do you want to do this?'" @callbackEvent="blockUser" />
     </div>
 </template>
 

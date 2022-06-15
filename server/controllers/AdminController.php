@@ -12,6 +12,43 @@ use Middleware\FormMiddleware as FormMiddleware;
 
 class AdminController
 {
+  public function changePublicInfo() {
+    if (!$this->checkAdminRole()) {
+      echo json_encode(["message" => "Invalid action. You are not admin", 'status' => 403]);
+      return;
+    }
+    $payload = ['phone', 'address', 'openTime', 'closeTime'];
+    $formValid = new FormMiddleware();
+    $check = $formValid->checkFullFields($payload);
+    if ($check) {
+      $phone = $_POST['phone'];
+      $address = $_POST['address'];
+      $openTime = $_POST['openTime'];
+      $closeTime = $_POST['closeTime'];
+      $openTimeList = explode(':', $openTime);
+      $closeTimeList = explode(':', $closeTime);
+      $openTimeMinute = $openTimeList[0] * 60 + $openTimeList[1];
+      $closeTimeMinute = $closeTimeList[0] * 60 + $closeTimeList[1];
+      if ($openTimeMinute > $closeTimeMinute) {
+        echo json_encode(['message' => "Open and close time are not valid!", 'status' => 400]);
+        return;
+      }
+      $db = Db::getInstance();
+      $sql = "update public_infomation set phone = '$phone', address = '$address', open_time = '$openTime', close_time = '$closeTime'";
+      try {
+        $row = mysqli_query($db, $sql);
+      } catch(\Exception $e) {
+        echo json_encode(["message" => "Invalid data", 'status' => 400]); return;
+      }
+      if ($row) {
+        echo json_encode(["response" => "Successfully", 'status' => 200]);
+      } else {
+        echo json_encode(["message" => "Server of database is error", 'status' => 500]);
+      }
+    } else {
+      echo json_encode(['message' => "Missing some fields", 'status' => 400]);
+    }
+  }
   public function getBlockUsers() {
     if (!$this->checkAdminRole()) {
       echo json_encode(["message" => "Invalid action. You are not admin", 'status' => 403]);
@@ -112,7 +149,11 @@ class AdminController
       $price = $_POST['price'];
       $db = Db::getInstance();
       $sql = "Insert into dish (name,description,image,price) Values ('$name','$description','$image', $price)";
-      $row = mysqli_query($db, $sql);
+      try {
+        $row = mysqli_query($db, $sql);
+      } catch(\Exception $e) {
+        echo json_encode(["message" => "Invalid data", 'status' => 400]); return;
+      }
       $id = mysqli_insert_id($db);
 
       if ($row) {
@@ -140,7 +181,12 @@ class AdminController
       $id = substr($param, 1, -1);
       $db = Db::getInstance();
       $sql = "select * from dish where id = $id";
-      $row = mysqli_query($db, $sql);
+      try {
+        $row = mysqli_query($db, $sql);
+      } catch(\Exception $e) {
+        echo json_encode(["message" => "Invalid data", 'status' => 400]);
+        return;
+      }
       if ($row->num_rows > 0) {
         $name = $_POST['name'];
         $description = $_POST['description'];
@@ -210,7 +256,11 @@ class AdminController
 
       $db = Db::getInstance();
       $sql = "insert into blog(title, content, image) values ('$title','$content', '$image')";
-      $row = mysqli_query($db, $sql);
+      try {
+        $row = mysqli_query($db, $sql);
+      } catch(\Exception $e) {
+        echo json_encode(["message" => "Invalid data", 'status' => 400]); return;
+      }
       $id = mysqli_insert_id($db);
       if ($row) {
         $blog = new blog_model($id, $title, $content, $image, $date);
@@ -272,7 +322,11 @@ class AdminController
 
       $db = Db::getInstance();
       $sql = "select * from blog where id = $id";
-      $row = mysqli_query($db, $sql);
+      try {
+        $row = mysqli_query($db, $sql);
+      } catch(\Exception $e) {
+        echo json_encode(["message" => "Invalid data", 'status' => 400]); return;
+      }
       if ($row->num_rows > 0) {
         $title = $_POST['title'];
         $content = $_POST['content'];

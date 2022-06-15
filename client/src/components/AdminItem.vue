@@ -130,7 +130,9 @@
     </v-container>
   </div>
 </template>
-
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+</style>
 <script>
 import Button from "./Button.vue";
 
@@ -175,6 +177,7 @@ export default {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        fontFamily: "Roboto, sans-serif",
       },
       styleHeader: {
         margin: "10px auto",
@@ -186,18 +189,19 @@ export default {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        fontFamily: "Roboto, sans-serif",
       },
       element: {
         textAlign: "center",
       },
       primary: {
-        fontFamily: "Roboto",
+        fontFamily: "Roboto, sans-serif",
         fontSize: "16px",
         fontWeight: "700",
         color: "#2a4365",
       },
       secondary: {
-        fontFamily: "Poppins",
+        fontFamily: "Roboto, sans-serif",
         fontSize: "14px",
         lineHeight: "160%",
         textDecorationLine: "underline",

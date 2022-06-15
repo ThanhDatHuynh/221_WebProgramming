@@ -13,4 +13,5 @@
   $router->post('/admin/unblock_user', 'AdminController@unblockUser');
   $router->post('/admin/delete_user/{id}', 'AdminController@deleteUser');
   $router->post('/admin/delete_comment/{id}', 'AdminController@deleteComment');
+  $router->post('/admin/change_public_info', 'AdminController@changePublicInfo');
 ?>

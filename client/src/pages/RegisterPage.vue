@@ -9,13 +9,8 @@
         </div>
         <v-layout align-center justify-center>
           <v-col>
-            <Form
-              :type="'Register'"
-              :data="formData"
-              :errorMessages="errorMessages"
-              @onFormChange="handleFormChange"
-              @onSubmit="handleSubmit"
-            />
+            <Form :type="'Register'" :data="formData" :errorMessages="errorMessages" @onFormChange="handleFormChange"
+              @onSubmit="handleSubmit" />
           </v-col>
         </v-layout>
         <v-layout align-center justify-center>
@@ -64,30 +59,34 @@ export default {
         confirmPassword: "",
       },
       schema: yup.object().shape({
-        email: yup.string().email().label("Email"),
+        username: yup.string().min(1).label("Username"),
+        email: yup.string().email().min(1).label("Email"),
         phone: yup
           .string()
           .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
+        password: yup.string().min(5).label("Password")
       }),
     };
   },
 
   methods: {
     async handleInputValidation({ name, value }) {
-      let validationResult = await this.schema
-        .validate({ [name]: value })
+      let validationResult = await this.schema.validate({ [name]: value })
         .catch((error) => {
           return error;
         });
       if (validationResult.errors) {
         this.errorMessages[name] = validationResult.errors[0];
+        return false;
       } else {
         this.errorMessages[name] = "";
+        return true;
       }
     },
 
     handleFormChange(newData) {
       this.formData[newData.name] = newData.value;
+      console.log(this.formData[newData.name])
       this.handleInputValidation(newData);
     },
 
@@ -101,9 +100,17 @@ export default {
       this.register();
     },
 
-    register() {
+    async register() {
       var __this = this;
-
+      let usernameOK = await this.handleInputValidation({name: "username", value: __this.formData.username}) 
+      let phoneOK = await this.handleInputValidation({name: "phone", value: __this.formData.phone}) 
+      let emailOK = await this.handleInputValidation({name: "email", value: __this.formData.email})      
+      let passwordOK = await this.handleInputValidation({name: "password", value: __this.formData.password})
+      
+      if (!usernameOK || !phoneOK || !emailOK || !passwordOK) {
+        console.log(phoneOK);
+        return;
+      }
       var settings = {
         url: `${process.env.VUE_APP_API_URL}/auth/register`,
         method: "POST",
@@ -151,6 +158,7 @@ export default {
   background-size: cover;
   height: 1024px;
 }
+
 .reservation-note {
   margin: 20px auto;
   width: 100%;
@@ -162,26 +170,31 @@ export default {
   flex-wrap: wrap;
 }
 
-.reservation-note > * {
+.reservation-note>* {
   width: 100%;
 }
 
 .note-title {
-  font-family: Oleo Script Swash Caps;
+  font-family: Roboto, 'san-serif';
   text-align: center;
   font-size: 200%;
   margin: 20px 0 20px 0;
 }
+
 .text {
   color: rgb(159, 159, 159);
 }
+
 .content {
   width: 70%;
 }
+
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
+
 .title-wrapper {
   margin-bottom: 4%;
 }
+
 .menu-title {
   font-family: Oleo Script Swash Caps;
   text-align: center;
@@ -194,9 +207,11 @@ export default {
   .background {
     height: 824px;
   }
+
   .content {
     width: 85%;
   }
+
   .menu-title {
     font-family: Oleo Script Swash Caps;
     text-align: center;
