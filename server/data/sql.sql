@@ -57,11 +57,6 @@ create table public_infomation(
     open_time varchar(500),
     close_time varchar(500)
 );
-create table order (
-    id int auto_increment primary key,
-    userID int,
-    foreign key(userID) references user(id),
-);
 
 create table black_list(
 	email varchar(100) primary key
