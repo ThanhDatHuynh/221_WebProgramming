@@ -4,11 +4,14 @@ create schema restaurant;
 
 use restaurant;
 
+
+
 create table dish (
 	id int auto_increment primary key,
     name varchar(50) not null,
     description varchar(2000) not null,
     image varchar(200) not null
+    price int,
 );
 
 create table blog(
@@ -58,4 +61,8 @@ create table order (
     id int auto_increment primary key,
     userID int,
     foreign key(userID) references user(id),
+);
+
+create table black_list(
+	email varchar(100) primary key
 );

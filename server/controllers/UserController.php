@@ -14,6 +14,41 @@ use mysqli;
 
 class UserController
 {
+  // public function makeOrder() {
+  //   $db = Db::getInstance();
+  //   /*
+  //   Order:
+  //     id
+  //     user
+  //   Foreach food_id in food_list
+  //     insert into food_order_relation values(food_id, order_id)
+  //   */ 
+  //   $user = $_POST['user'];
+  //   $foods = $_POST['foods'];
+  //   $sql = "insert into order (user) values($user)";
+  //   try {
+  //     $row = mysqli_query($db, $sql);
+  //   } catch(\Exception $e) {
+  //     echo json_encode(["message" => "Invalid data", 'status' => 400]); return;
+  //   }
+  //   $order_id = mysqli_insert_id($db);
+  //   //echo $foods;
+  //   foreach ($foods as $food) {
+  //     $food = json_decode($food, true);
+  //     $food_id = $food['foodID'];
+  //     $quantity = $food['quantity'];
+  //     $sql = "insert into food_order_relation values($order_id, $food_id, $quantity)";
+  //     try {
+  //       $row = mysqli_query($db, $sql);
+  //     } catch(\Exception $e) {
+  //       echo json_encode(["message" => "Invalid data", 'status' => 400]); return;
+  //     }
+  //   }
+  // }
+  // public function getAllOrders() {
+  //   $db = Db::getInstance();
+  //   $sql = 'select * from order, food, food_order_relation'; 
+  // }
   public function getPublicInfo() {
     $db = Db::getInstance();
     $sql = 'SELECT * FROM public_infomation';
