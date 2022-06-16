@@ -11,7 +11,7 @@ create table dish (
     name varchar(50) not null,
     description varchar(2000) not null,
     image varchar(200) not null,
-    price int,
+    price int
 );
 
 create table blog(
