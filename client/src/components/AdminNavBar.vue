@@ -14,6 +14,9 @@
       <v-btn depressed color="black" to="/admin/user" small>
         <span class="linkText">Users</span>
       </v-btn>
+      <v-btn depressed color="black" to="/admin/reservation" small>
+        <span class="linkText">Reservation</span>
+      </v-btn>
       <v-btn v-show="user !== null" depressed color="black" to="/account" small>
         <span class="linkText">Account</span>
       </v-btn>
@@ -46,6 +49,7 @@ export default {
   margin: 0;
   background-color: black;
 }
+
 .linkText {
   color: white;
 }

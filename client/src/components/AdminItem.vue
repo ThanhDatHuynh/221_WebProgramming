@@ -128,6 +128,50 @@
         </div>
       </v-row>
     </v-container>
+    <v-container v-else-if="type == 'ReservationHeader'" :style="[styleHeader]">
+      <v-row align="center" justify="center">
+        <v-col :style="[element, primary]">
+          {{ items[0] }}
+        </v-col>
+        <v-col :style="[element, primary]">
+          {{ items[1] }}
+        </v-col>
+        <v-col :style="[element, primary]">
+          {{ items[2] }}
+        </v-col>
+        <v-col :style="[element, primary]">
+          {{ items[3] }}
+        </v-col>
+        <v-col>
+          <div class="add-btn ">
+            <Button width="96px" height="27px" text="White Button" />
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container :class="`elevation-2`" v-else-if="type == 'Reservation'" :style="[style]">
+      <v-row align="center" justify="center">
+        <v-col :style="[element, primary]">
+          {{ items[0] }}
+        </v-col>
+        <v-col :style="[element, primary]">
+          {{ items[1] }}
+        </v-col>
+        <v-col :style="[element, primary]">
+          {{ items[2] }}
+        </v-col>
+        <v-col :style="[element, secondary]">
+          <div v-if="items[3].length > 30">{{ items[3].slice(0, 30) + "..." }}</div>
+          <div v-else>{{ items[3] }}</div>
+        </v-col>
+
+        <v-col>
+          <Button :style="[element]" text="Show" :width="'90px'" :height="'27px'" @onClick="$vm2.open(`modal-reservation-${items[0]}`)" />
+        </v-col>
+
+
+      </v-row>
+    </v-container>
   </div>
 </template>
 <style scoped>

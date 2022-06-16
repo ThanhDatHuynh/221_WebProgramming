@@ -6,6 +6,7 @@ use blog_model;
 use dish_model;
 use comment_model;
 use user_model;
+use reservation_model;
 use Db;
 use Middleware\AuthMiddleware as AuthMiddleware;
 use Middleware\FormMiddleware as FormMiddleware;
@@ -62,10 +63,8 @@ class AdminController
       while ($row = mysqli_fetch_assoc($result)) {
         $list[] = $row['email'];
       }
-      echo json_encode(['response' => $list, 'status' => 200]);
-    } else {
-      echo json_encode(['message' => "Server or database is error", 'status' => 500]);
-    }
+    } 
+    echo json_encode(['response' => $list, 'status' => 200]);
   }
   public function blockUser() {
     if (!$this->checkAdminRole()) {
@@ -446,5 +445,24 @@ class AdminController
     } else {
       echo json_encode(["message" => "Comment $comment_id not found", 'status' => 404]);
     }
+  }
+  public function getAllReservations() {
+    if (!$this->checkAdminRole()) {
+      echo json_encode(["message" => "Invalid action. You are not admin", 'status' => 403]);
+      return;
+    }
+    $db = Db::getInstance();
+    $sql = "select * from reservation";
+    try {
+      $result = mysqli_query($db, $sql);
+    } catch(\Exception $e) {
+      echo json_encode(["message" => "Invalid data", 'status' => 400]); return;
+    }
+    if ($result->num_rows > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        $list[] = new reservation_model($row['id'], $row['name'], $row['email'], $row['phoneNumber'], $row['NoP'], $row['date'], $row['time'], $row['description']);
+      }
+    } 
+    echo json_encode(['response' => $list, 'status' => 200]);
   }
 }

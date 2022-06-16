@@ -1,15 +1,24 @@
 <template>
-    <div style="min-height:60%;">
+    <div style="min-height:65%;">
         <div class="d-flex flex-wrap justify-center">
             <AdminItem type="UserHeader" :width="'100vw'" :height="'100px'" :imgSize="'70px'"
                 :items="['ID', 'Name', 'Email', 'Phone', 'Manager']" />
         </div>
         <div class="d-flex flex-wrap justify-center">
-            <div v-for="user in users" :key="user.id">
+            <div v-for="user in users.filter(
+                (_, index) => index >= (page - 1) * 5 && index <= page * 5 - 1
+            )" :key="user.id">
                 <AdminItem type="User" :width="'100vw'" :height="'100px'" :imgSize="'70px'"
                     :items="[user.id, user.username, user.email, user.phoneNumber, user.manager, user.block]"
                     @onSubmit="toggleDeleteBtn(user.id)" @onBlock="toggleBlockBtn(user.id)" />
             </div>
+        </div>
+        <div class="text-center">
+            <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
+                users.length % 5 === 0
+                    ? Math.floor(users.length / 5)
+                    : Math.floor(users.length / 5) + 1
+            " circle></v-pagination>
         </div>
         <ModalConfirm @toggleModalEvent="toggleDeleteBtn()" :isOpen="this.isDeleteModalOpen" :title="'Are you sure ?'"
             :content="'Do you want to delete this user?'" @callbackEvent="deleteUser" />
@@ -31,12 +40,22 @@ export default {
     },
     data() {
         return {
+            page: 1,
             isDeleteModalOpen: false,
             isBlockModalOpen: false,
             idUser: 0,
             idUserBlock: 0,
             users: [],
         };
+    }, computed: {
+        modelPage: {
+            get() {
+                return this.page;
+            },
+            set(value) {
+                this.page = value;
+            },
+        },
     },
     methods: {
         // reloadPage() {
@@ -70,7 +89,7 @@ export default {
             $.ajax(settings)
                 .done(() => {
                     this.$router.go(this.$router.current);
-            });
+                });
         },
         deleteUser() {
             var settings = {

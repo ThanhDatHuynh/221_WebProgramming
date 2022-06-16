@@ -1,53 +1,27 @@
 <template>
-  <div style="min-height:60vh">
+  <div style="min-height:65vh">
     <div class="d-flex flex-wrap justify-center">
-      <AdminItem
-        type="DishHeader"
-        :width="'95vw'"
-        :height="'100px'"
-        :imgSize="'70px'"
-        :items="['ID', 'Name', 'Image', 'Description', 'Price']"
-        @onSubmit="toggleAddBtn"
-        to="/admin/user"
-      />
+      <AdminItem type="DishHeader" :width="'95vw'" :height="'100px'" :imgSize="'70px'"
+        :items="['ID', 'Name', 'Image', 'Description', 'Price']" @onSubmit="toggleAddBtn" to="/admin/user" />
     </div>
     <div class="d-flex flex-wrap justify-center">
-      <div
-        v-for="dish in dishes.filter(
-          (_, index) => index >= (page - 1) * 5 && index <= page * 5 - 1
-        )"
-        :key="dish.id"
-      >
-        <AdminItem
-          type="Dish"
-          :width="'95vw'"
-          :height="'100px'"
-          :imgSize="'70px'"
+      <div v-for="dish in dishes.filter(
+        (_, index) => index >= (page - 1) * 5 && index <= page * 5 - 1
+      )" :key="dish.id">
+        <AdminItem type="Dish" :width="'95vw'" :height="'100px'" :imgSize="'70px'"
           :items="[dish.id, dish.name, dish.image, dish.description, dish.price]"
-          @onSubmit="toggleDeleteBtn(dish.id)"
-        />
+          @onSubmit="toggleDeleteBtn(dish.id)" />
       </div>
     </div>
     <div class="text-center">
-      <v-pagination
-        class="mt-4 mb-8"
-        v-model="modelPage"
-        color="#e1651f"
-        :length="
-          dishes.length % 5 === 0
-            ? Math.floor(dishes.length / 5)
-            : Math.floor(dishes.length / 5) + 1
-        "
-        circle
-      ></v-pagination>
+      <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
+        dishes.length % 5 === 0
+          ? Math.floor(dishes.length / 5)
+          : Math.floor(dishes.length / 5) + 1
+      " circle></v-pagination>
     </div>
-    <ModalConfirm
-      @toggleModalEvent="toggleDeleteBtn()"
-      :isOpen="this.isDeleteModalOpen"
-      :title="'Are you sure ?'"
-      :content="'Do you want to delete this dish ?'"
-      @callbackEvent="deleteDish"
-    />
+    <ModalConfirm @toggleModalEvent="toggleDeleteBtn()" :isOpen="this.isDeleteModalOpen" :title="'Are you sure ?'"
+      :content="'Do you want to delete this dish ?'" @callbackEvent="deleteDish" />
   </div>
 </template>
 

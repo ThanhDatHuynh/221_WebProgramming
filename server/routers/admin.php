@@ -9,6 +9,7 @@
 
   $router->get('/admin/users', 'AdminController@getAllUsers');
   $router->get('/admin/get_block_users', 'AdminController@getBlockUsers');
+  $router->get('/admin/get_all_reservations', 'AdminController@getAllReservations');
   $router->post('/admin/block_user', 'AdminController@blockUser');
   $router->post('/admin/unblock_user', 'AdminController@unblockUser');
   $router->post('/admin/delete_user/{id}', 'AdminController@deleteUser');

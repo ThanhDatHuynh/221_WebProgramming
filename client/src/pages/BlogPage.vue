@@ -13,21 +13,25 @@
     </div>
 
     <div class="buttonCreate">
-      <v-btn
-        v-show="manager == '1'"
-        @click="this.routeToCreateBlog"
-        class="buttonSize"
-        color="#e1651f"
-        to="/admin/blog/create"
-      >
+      <v-btn v-show="manager == '1'" @click="this.routeToCreateBlog" class="buttonSize" color="#e1651f"
+        to="/admin/blog/create">
         <span class="linkText">Create a new blog</span>
       </v-btn>
     </div>
 
     <div class="d-flex flex-wrap justify-center">
-      <div v-for="blog in blogs.slice().reverse()" :key="blog.id">
+      <div v-for="blog in blogs.slice().reverse().filter(
+        (_, index) => index >= (page - 1) * 4 && index <= page * 4 - 1
+      )" :key="blog.id">
         <blog-item :blog="blog" />
       </div>
+    </div>
+    <div class="text-center">
+      <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
+        blogs.length % 4 === 0
+          ? Math.floor(blogs.length / 4)
+          : Math.floor(blogs.length / 4) + 1
+      " circle></v-pagination>
     </div>
   </div>
 </template>
@@ -51,7 +55,18 @@ export default {
     return {
       manager: managerValue,
       blogs: [],
+      page: 1,
     };
+  },
+  computed: {
+    modelPage: {
+      get() {
+        return this.page;
+      },
+      set(value) {
+        this.page = value;
+      },
+    },
   },
   methods: {
     routeToCreateBlog() {
@@ -65,7 +80,7 @@ export default {
         timeout: 0,
       };
 
-      $.ajax(settings).done(function(response) {
+      $.ajax(settings).done(function (response) {
         const a = JSON.parse(response).response;
         __this.blogs = a;
       });
@@ -80,40 +95,49 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 .title-wrapper {
   margin-bottom: 4%;
 }
+
 .menu-title {
   font-family: Oleo Script Swash Caps;
   text-align: center;
   font-size: 500%;
   margin: 2% 0% -1% 0%;
 }
+
 .menu-description {
   font-family: 'Roboto', sans-serif;
   text-align: center;
   margin: 0% 0% -1% 0%;
 }
+
 .btn-wrapper {
   margin: 25px 0 65px 0;
 }
+
 .linkText {
   color: white;
 }
+
 .buttonCreate {
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
+
 .buttonSize {
   width: 300px;
   height: 100px;
 }
+
 @media (max-width: 60em) {
   .buttonSize {
     width: 200px;
     height: 60px;
   }
+
   .linkText {
     color: white;
     font-size: 14px;

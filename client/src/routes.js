@@ -16,6 +16,7 @@ import AdminUser from "./pages/AdminUser";
 import MenuDetailPage from "./pages/MenuDetailPage";
 import CartPage from "./pages/CartPage";
 import AdminAboutPage from "./pages/AdminAboutPage";
+import AdminReservationPage from "./pages/AdminReservationPage";
 const routes = [
   { path: "/", name: "homePage", component: HomePage },
 
@@ -85,6 +86,11 @@ const routes = [
     path: "/admin/about",
     name: "adminAboutPage",
     component: AdminAboutPage,
+  },
+  {
+    path: "/admin/reservation",
+    name: "adminReservationPage",
+    component: AdminReservationPage,
   },
 ];
 

@@ -20,14 +20,24 @@
 
     <div class="blog-content">
       <h3>WRITTEN ON {{ item.blog.date }}</h3>
-      <paragraph class="text-justify" style='font-family: "Roboto", "sans-serif";' :content="item.blog.content"></paragraph>
+      <paragraph class="text-justify" style='font-family: "Roboto", "sans-serif";' :content="item.blog.content">
+      </paragraph>
     </div>
 
     <div class="reply">
       <h2>Reply</h2>
       <comment v-if="user !== null" :id="item.blog.id" />
-      <div v-for="comment in comments.slice().reverse()" :key="comment.id">
+      <div v-for="comment in comments.slice().reverse().filter(
+        (_, index) => index >= (page - 1) * 2 && index <= page * 2 - 1
+      )" :key="comment.id">
         <comment-list-item :comment="comment" />
+      </div>
+      <div class="text-center">
+        <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
+          comments.length % 2 === 0
+            ? Math.floor(comments.length / 2)
+            : Math.floor(comments.length / 2) + 1
+        " circle></v-pagination>
       </div>
     </div>
   </div>
@@ -49,6 +59,7 @@ export default {
       userValue = JSON.parse(localStorage.getItem("User"));
     }
     return {
+      page: 1,
       isLoading: false,
       formData: {
         // Vue Object Data will be convert into Observer
@@ -60,7 +71,16 @@ export default {
       user: userValue,
     };
   },
-
+  computed: {
+    modelPage: {
+      get() {
+        return this.page;
+      },
+      set(value) {
+        this.page = value;
+      },
+    },
+  },
   methods: {
     reloadPage() {
       this.$router.push("/blog");
@@ -119,6 +139,7 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap");
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 .blog-content {
   padding: 5vw;
   font-family: "Roboto", "sans-serif";
