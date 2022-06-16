@@ -10,7 +10,7 @@ create table dish (
 	id int auto_increment primary key,
     name varchar(50) not null,
     description varchar(2000) not null,
-    image varchar(200) not null
+    image varchar(200) not null,
     price int,
 );
 
