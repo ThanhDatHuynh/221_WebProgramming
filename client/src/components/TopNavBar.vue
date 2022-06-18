@@ -1,51 +1,85 @@
 <template>
   <v-container v-show="manager != '1'" fluid>
-    <div class="d-flex">
-      <div class="mr-auto"></div>
-      <div class="NavBar">
-        <div v-show="user != null">
-          <v-btn depressed color="black" to="/cart" small>
-            <span class="linkText">Cart</span>
-          </v-btn>
-        </div>
-        <div>
-          <v-btn depressed color="black" to="/" small>
-            <span class="linkText">Home</span>
-          </v-btn>
-        </div>
-        <div>
-          <v-btn depressed color="black" to="/about" small>
-            <span class="linkText">About</span>
-          </v-btn>
-        </div>
-        <div>
-          <v-btn depressed color="black" to="/menu" small>
-            <span class="linkText">Menu</span>
-          </v-btn>
-        </div>
-        <div>
-          <v-btn depressed color="black" to="/blog" small>
-            <span class="linkText">Blogs</span>
-          </v-btn>
-        </div>
-        <div>
-          <v-btn depressed color="black" to="/reservation" small>
-            <span class="linkText">Reservation</span>
-          </v-btn>
-        </div>
-        <div>
-          <v-btn v-show="user === null" depressed color="black" to="/auth" small>
-            <span class="linkText">Sign in</span>
-          </v-btn>
-        </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-black">
+      <button
+        class="navbar-toggler  me-0 ms-auto"
+        style="background-color:darkgray"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+        <ul class="navbar-nav me-0 ms-auto text-center">
+          <li class="nav-item">
+            <div v-show="user != null" class="nav-link">
+              <v-btn depressed color="black" to="/cart" small>
+                <span class="linkText">Cart</span>
+              </v-btn>
+            </div>
+          </li>
 
-        <div>
-          <v-btn v-show="user !== null" depressed color="black" to="/account/profile" small>
-            <span class="linkText"> Acccount</span>
-          </v-btn>
-        </div>
+          <li class="nav-item">
+            <div class="nav-link">
+              <v-btn depressed color="black" to="/" small>
+                <span class="linkText">Home</span>
+              </v-btn>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <v-btn depressed color="black" to="/about" small>
+                <span class="linkText">About</span>
+              </v-btn>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <v-btn depressed color="black" to="/menu" small>
+                <span class="linkText">Menu</span>
+              </v-btn>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <v-btn depressed color="black" to="/blog" small>
+                <span class="linkText">Blogs</span>
+              </v-btn>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="nav-link">
+              <v-btn depressed color="black" to="/reservation" small>
+                <span class="linkText">Reservation</span>
+              </v-btn>
+            </div>
+          </li>
+          <li class="nav-item"  v-show="user === null">
+            <div class="nav-link">
+              <v-btn
+                depressed
+                color="black"
+                to="/auth"
+                small
+              >
+                <span class="linkText">Sign in</span>
+              </v-btn>
+            </div>
+          </li>
+          <li class="nav-item" v-show="user !== null">
+            <div class="nav-link">
+              <v-btn depressed color="black" to="/account/profile" small>
+                <span class="linkText"> Acccount</span>
+              </v-btn>
+            </div>
+          </li>
+        </ul>
       </div>
-    </div>
+    </nav>
   </v-container>
 </template>
 
@@ -70,10 +104,12 @@ export default {
 
 <style scoped>
 span {
-      transition: transform .1.5s; /* Animation */
+  transition: transform 0.1.5s; /* Animation */
 }
 span:hover {
-  transform: scale(1.2); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  transform: scale(
+    1.2
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
 
 .together {
@@ -84,6 +120,7 @@ span:hover {
   width: 100vw;
   margin: 0;
   background-color: black;
+  padding: 0;
 }
 
 .linkText {
@@ -92,50 +129,5 @@ span:hover {
 
 .NavBar {
   display: flex;
-}
-
-@media (max-width: 45em) {
-  .NavBar>div:nth-child(1) {
-    display: none;
-  }
-
-  .NavBar>div:nth-child(2) {
-    display: none;
-  }
-
-  .NavBar>div:nth-child(4) {
-    display: none;
-  }
-}
-
-@media (max-width: 15em) {
-  .NavBar>div:nth-child(1) {
-    display: none;
-  }
-
-  .NavBar>div:nth-child(2) {
-    display: none;
-  }
-
-  .NavBar>div:nth-child(4) {
-    display: none;
-  }
-
-  .NavBar>div {
-    width: 70%;
-    padding: 0px;
-  }
-
-  .NavBar {
-    flex-wrap: wrap;
-  }
-
-  .NavBar>div>v-btn {
-    width: 50%;
-  }
-
-  .buttonSize {
-    width: 50px;
-  }
 }
 </style>

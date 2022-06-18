@@ -56,7 +56,7 @@ export default {
       schema: yup.object().shape({
         dishId: yup.string(),
         imageUrl: yup.string().url().min(1).label("Image URL"),
-        dishTitle: yup.string().min(1).label("Tital"),
+        dishTitle: yup.string().min(1).label("Title"),
         dishPrice: yup.string().min(1).label("Price")
       }),
     };

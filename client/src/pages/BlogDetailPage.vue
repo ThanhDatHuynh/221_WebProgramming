@@ -6,7 +6,7 @@
         <div style="width:100%;display:flex;justify-content:center; margin: 20px 0px 20px 0;">
           <v-btn v-show="manager == '1'" @click="toggleDeleteBtn()" width="7vw" height="2.5vw" color="#e1651f">
             <span class="linkText">Delete</span>
-            <ModalConfirm @toggleModalEvent="toggleDeleteBtn()" :isOpen="this.isModalOpen" :title="'Are you sure ?'"
+            <ModalConfirm @toggleModalEvent="toggleDeleteBtn()" :isOpen="this.isModalOpen" :title="'Are you sure?'"
             :content="'Do you want to delete this blog?'" @callbackEvent="deletePost" />
           </v-btn>
           <div style="width:5%"></div>
@@ -26,9 +26,9 @@
       </paragraph>
     </div>
 
-    <div class="reply">
+    <div class="reply" v-show="user != null">
       <h2>Reply</h2>
-      <comment v-if="user !== null" :id="item.blog.id" />
+      <comment v-if="user != null" :id="item.blog.id" />
       <div v-for="comment in comments.slice().reverse().filter(
         (_, index) => index >= (page - 1) * 2 && index <= page * 2 - 1
       )" :key="comment.id">
