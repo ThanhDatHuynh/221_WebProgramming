@@ -166,7 +166,10 @@
         </v-col>
 
         <v-col>
-          <Button :style="[element]" text="Show" :width="'90px'" :height="'27px'" @onClick="$vm2.open(`modal-reservation-${items[0]}`)" />
+          <!-- <Button :style="[element]" text="Show" :width="'90px'" :height="'27px'" @onClick="$modal.show(`modal-reservation-${items[0]}`)" /> -->
+        <v-btn type="button" :style="[btn]" class="btn" data-toggle="modal" :data-target="`#modal-reservation-${items[0]}`">
+          Show
+        </v-btn>
         </v-col>
 
 
@@ -222,6 +225,13 @@ export default {
         alignItems: "center",
         justifyContent: "center",
         fontFamily: "Roboto, sans-serif",
+      },
+      btn: {
+        color: "white",
+        background: "#e1651f",
+        borderRadius: "5px",
+        fontSize: "18px",
+        padding: "16px",
       },
       styleHeader: {
         margin: "10px auto",

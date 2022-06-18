@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-3">
     <div class="d-flex flex-wrap justify-center mx-8 my-15">
       <div class="images mx-4">
         <img
@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div class="mx-8 my-15">
+    <div class="mx-8 my-15 reveal fade-bottom">
       <div class="question-title">
         <p>Why to choose us?</p>
       </div>
@@ -63,12 +63,12 @@
         </p>
       </div>
     </div>
-    <div class="d-flex flex-wrap justify-center my-15">
+    <div class="d-flex flex-wrap justify-center my-15 reveal fade-bottom">
       <div v-for="service in services" :key="service[0]">
         <Service :service="service" />
       </div>
     </div>
-    <div class="justify-center my-15 mx-15 row">
+    <div class="justify-center my-15 mx-15 row reveal fade-left">
       <div class="col-md-6 align-items-center">
         <div class="about-title text-center">Our Infomation</div>
         <ul style="padding-left:10%; padding-top: 5%">

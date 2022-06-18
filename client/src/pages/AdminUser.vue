@@ -1,5 +1,5 @@
 <template>
-    <div style="min-height:65%;">
+    <div style="min-height:65%;" class="bg-6">
         <div class="d-flex flex-wrap justify-center">
             <AdminItem type="UserHeader" :width="'100vw'" :height="'100px'" :imgSize="'70px'"
                 :items="['ID', 'Name', 'Email', 'Phone', 'Manager']" />

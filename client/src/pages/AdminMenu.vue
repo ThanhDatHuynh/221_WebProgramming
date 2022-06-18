@@ -1,5 +1,5 @@
 <template>
-  <div style="min-height:65vh">
+  <div style="min-height:65vh" class="bg-5">
     <div class="d-flex flex-wrap justify-center">
       <AdminItem type="DishHeader" :width="'95vw'" :height="'100px'" :imgSize="'70px'"
         :items="['ID', 'Name', 'Image', 'Description', 'Price']" @onSubmit="toggleAddBtn" to="/admin/user" />

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-1">
     <div class="title-wrapper">
       <div class="menu-title">
         <p>Our Menu</p>

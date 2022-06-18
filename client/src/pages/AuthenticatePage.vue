@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="background">
-    <v-container class="content">
+    <v-container class="content zoom-out">
       <v-col>
         <div class="title-wrapper">
           <div class="menu-title">

@@ -1,23 +1,30 @@
 <template>
-  <div class="reservation-page-wrapper">
-    <div class="title-wrapper">
-      <div class="reservation-title">
-        <p>Make Reservation</p>
+  <div class="bg-4">
+    <div class="reservation-page-wrapper">
+      <div class="title-wrapper">
+        <div class="reservation-title">
+          <p>Make Reservation</p>
+        </div>
+        <div class="reservation-description">
+          <p>
+            Fish is one of the most wholesome foods that man can eat. In fact,
+            people have been eating fish throughout human.
+          </p>
+        </div>
       </div>
-      <div class="reservation-description">
-        <p>
-          Fish is one of the most wholesome foods that man can eat. In fact,
-          people have been eating fish throughout human.
-        </p>
+      <div class="reservation-form-wrapper">
+        <Form
+          :type="'Reservation'"
+          :data="formData"
+          :errorMessages="errorMessages"
+          @onFormChange="handleFormChange"
+          @onSubmit="handleSubmit"
+        />
       </div>
-    </div>
-    <div class="reservation-form-wrapper">
-      <Form :type="'Reservation'" :data="formData" :errorMessages="errorMessages" @onFormChange="handleFormChange"
-        @onSubmit="handleSubmit" />
-    </div>
-    <div :style="style" class="reservation-note" ref="note">
-      <div ref="noteTitle" class="note-title"></div>
-      <ReservationNote :notes="this.notes" :isSuccess="isSuccess" />
+      <div :style="style" class="reservation-note" ref="note">
+        <div ref="noteTitle" class="note-title"></div>
+        <ReservationNote :notes="this.notes" :isSuccess="isSuccess" />
+      </div>
     </div>
   </div>
 </template>
@@ -77,10 +84,8 @@ export default {
         phone: yup
           .string()
           .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
-        date: yup
-          .string(),
-        time: yup
-          .string(),
+        date: yup.string(),
+        time: yup.string(),
         totalPeople: yup
           .number()
           .min(1)
@@ -157,7 +162,7 @@ export default {
         },
       };
 
-      $.ajax(settings).done(function (response) {
+      $.ajax(settings).done(function(response) {
         response = JSON.parse(JSON.stringify(JSON.parse(response)));
         __this.$refs.note.style.display = "flex";
         if (response.status == 200) {
@@ -203,6 +208,21 @@ export default {
   flex-wrap: wrap;
   width: 50%;
   margin: 0 auto;
+  animation: example 700ms ease-out;
+  animation-fill-mode: backwards;
+  transition: transform 0.1.5s; /* Animation */
+}
+@keyframes example {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
 }
 
 .reservation-note {
@@ -216,12 +236,12 @@ export default {
   flex-wrap: wrap;
 }
 
-.reservation-note>* {
+.reservation-note > * {
   width: 100%;
 }
 
 .note-title {
-  font-family: Roboto, 'san-serif';
+  font-family: Roboto, "san-serif";
   text-align: center;
   font-size: 200%;
   margin: 20px 0 20px 0;

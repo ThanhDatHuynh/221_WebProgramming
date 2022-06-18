@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div  class="bg-2">
     <div class="title-wrapper">
       <div class="menu-title">
         <p>Our Blogs</p>

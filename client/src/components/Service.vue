@@ -21,8 +21,22 @@ export default {
 
 <style scoped>
 @import url('https://fonts.googleapis.com/css2?family=Oleo+Script+Swash+Caps&display=swap');
-    .service-card {
-        margin: 30px 70px;
+@keyframes example {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}    .service-card {
+     margin: 30px 70px;
+    animation: example 700ms ease-out;
+  animation-fill-mode: backwards;
+  transition: transform .1.5s; /* Animation */
     }
     .service-container {
         padding: 2% 4%;

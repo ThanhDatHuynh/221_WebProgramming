@@ -202,4 +202,5 @@ export default {
 .btn-wrapper {
   margin: 10px 0 50px 0;
 }
+
 </style>
