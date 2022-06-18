@@ -211,9 +211,12 @@ export default {
         $.ajax(settings).done(function (response) {
           response = JSON.parse(JSON.stringify(JSON.parse(response)));
           if (response.status == 200) {
+            let newUser = response.response
             __this.$refs.noteTitle.innerHTML =
               "Your Profile Has Been Updated! Please Recheck Before Leaving";
             __this.editNotes(response.response);
+            
+            localStorage.setItem("User", JSON.stringify(newUser));
           } else {
             __this.$refs.noteTitle.innerHTML = response.message;
             __this.isSuccess = true;
@@ -248,7 +251,6 @@ export default {
         };
         $.ajax(settings).done(function (response) {
           response = JSON.parse(JSON.stringify(JSON.parse(response)));
-          console.log(response)
           if (response.status == 200) {
             __this.$refs.noteTitle.innerHTML =
               "Your Password Has Been Updated! Please Recheck Before Leaving";
@@ -271,7 +273,6 @@ export default {
     if (this.$route.name === "editAccount") {
       this.$router.history.push({ name: "editAccountProfile" });
     }
-
     if (localStorage.getItem("User") != "") {
       const UserInfo = JSON.parse(localStorage.getItem("User"));
       this.formData.username = UserInfo["username"];
