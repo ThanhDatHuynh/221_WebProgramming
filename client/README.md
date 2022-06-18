@@ -11,7 +11,7 @@ export NODE_OPTIONS=--openssl-legacy-provider
 ```
 Windows CMD
 ```
-set NODE_OPTIONS=--openssl-legacy-provider
+SET NODE_OPTIONS=--openssl-legacy-provider
 ```
 ### Compiles and hot-reloads for development
 ```

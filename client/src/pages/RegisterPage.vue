@@ -64,7 +64,8 @@ export default {
         phone: yup
           .string()
           .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
-        password: yup.string().min(5).label("Password")
+        password: yup.string().min(5).label("Password"),
+        confirmPassword: yup.string().min(5).label("Password")
       }),
     };
   },
@@ -86,7 +87,6 @@ export default {
 
     handleFormChange(newData) {
       this.formData[newData.name] = newData.value;
-      console.log(this.formData[newData.name])
       this.handleInputValidation(newData);
     },
 
@@ -106,9 +106,11 @@ export default {
       let phoneOK = await this.handleInputValidation({name: "phone", value: __this.formData.phone}) 
       let emailOK = await this.handleInputValidation({name: "email", value: __this.formData.email})      
       let passwordOK = await this.handleInputValidation({name: "password", value: __this.formData.password})
-      
+      if (__this.formData.password != __this.formData.confirmPassword) {
+        this.errorMessages.confirmPassword = "Password is not match!";
+        return;
+      }
       if (!usernameOK || !phoneOK || !emailOK || !passwordOK) {
-        console.log(phoneOK);
         return;
       }
       var settings = {

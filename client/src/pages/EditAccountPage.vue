@@ -93,23 +93,11 @@ export default {
         confirmNewPassword: "",
       },
       schema: yup.object().shape({
+        username: yup.string().min(1).label("Username"),
+        password: yup.string().min(5).label("Password"),
+        newPassword: yup.string().min(5).label("Password"),
+        //confirmNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'Password is not match!'),
         email: yup.string().email().label("Email"),
-        phone: yup
-          .string()
-          .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
-        date: yup
-          .string()
-          .matches(
-            /([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))/,
-            "Date must be of YYYY-MM-DD"
-          ),
-        time: yup
-          .string()
-          .matches(
-            /(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)/gm,
-            "Time must be of HH:MM:SS"
-          ),
-        totalPeople: yup.number().min(1).max(30).label("Number of persons"),
       }),
     };
   },
@@ -126,8 +114,10 @@ export default {
         });
       if (validationResult.errors) {
         this.errorMessages[name] = validationResult.errors[0];
+        return false;
       } else {
         this.errorMessages[name] = "";
+        return true;
       }
     },
 
@@ -173,7 +163,7 @@ export default {
       this.reloadPage();
     },
 
-    handleSubmit() {
+    async handleSubmit() {
       var __this = this;
       const formData = JSON.parse(JSON.stringify(this.formData));
 
@@ -191,7 +181,12 @@ export default {
         /**
          * Handle Edit Profile
          */
+
         this.toggleModalOpen("profile");
+        let usernameOK = await this.handleInputValidation({name: "username", value: __this.formData.username});
+        let phoneNumberOK = await this.handleInputValidation({name: "phoneNumber", value: __this.formData.phoneNumber});
+        let emailOK = await this.handleInputValidation({name: "email", value: __this.formData.email});
+        if (!usernameOK || ! phoneNumberOK || !emailOK) return;
         let settings = {
           url: `${process.env.VUE_APP_API_URL}/auth/update_profile`,
           method: "post",
@@ -224,6 +219,14 @@ export default {
          * Handle Edit Password
          */
         this.toggleModalOpen("password");
+        let passwordOK = await this.handleInputValidation({name: "password", value: __this.formData.password});
+        let newPasswordOK = await this.handleInputValidation({name: "newPassword", value: __this.formData.newPassword});
+        if (__this.formData.newPassword != __this.formData.confirmNewPassword) {
+          this.errorMessages.confirmNewPassword = "Password is not match!";
+          this.$forceUpdate();
+          return;
+        }
+        if (!passwordOK || !newPasswordOK) return;
         let settings = {
           url: `${process.env.VUE_APP_API_URL}/auth/update_password`,
           method: "post",
@@ -239,11 +242,15 @@ export default {
         };
         $.ajax(settings).done(function (response) {
           response = JSON.parse(JSON.stringify(JSON.parse(response)));
+          console.log(response)
           if (response.status == 200) {
             __this.$refs.noteTitle.innerHTML =
               "Your Password Has Been Updated! Please Recheck Before Leaving";
+              __this.isSuccess = true;
             __this.logoutUser();
           } else {
+            //__this.editNotes(response.message);
+            __this.isSuccess = true;
             __this.$refs.noteTitle.innerHTML = response.message;
           }
         });

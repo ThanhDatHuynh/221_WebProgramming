@@ -47,8 +47,8 @@ create table comment (
 	id serial primary key,
     userId int,
     blogId int,
-    foreign key(userId) references user(id),
-    foreign key(blogId) references blog(id),
+    foreign key(userId) references user(id) on delete cascade,
+    foreign key(blogId) references blog(id) on delete set null,
     description varchar(1000) not null
 );
 create table public_infomation(

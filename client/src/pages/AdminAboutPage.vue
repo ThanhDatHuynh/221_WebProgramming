@@ -47,7 +47,7 @@ export default {
                 phone: yup
                     .string()
                     .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
-                address: yup.string(),
+                address: yup.string().min(1).label("Address"),
                 openTime: yup.string(),
                 closeTime: yup.string(),
             }),
@@ -89,8 +89,10 @@ export default {
                 });
             if (validationResult.errors) {
                 this.errorMessages[name] = validationResult.errors[0];
+                return false;
             } else {
                 this.errorMessages[name] = "";
+                return true;
             }
         },
 
@@ -99,8 +101,11 @@ export default {
             this.handleInputValidation(newData);
         },
 
-        handleSubmit() {
+        async handleSubmit() {
             var __this = this;
+            let phoneOK = await this.handleInputValidation({name: "phone", value: __this.formData.phone});
+            let addressOK = await this.handleInputValidation({name: "address", value: __this.formData.address});
+            if (!phoneOK || !addressOK) {this.toggleModalOpen();return;}
             const formData = JSON.parse(JSON.stringify(this.formData));
             const UserToken = localStorage.getItem("UserToken");
             if (UserToken === "") {

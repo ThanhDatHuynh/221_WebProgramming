@@ -44,7 +44,7 @@ class AuthenticationController
 
       $check = $formValid->lengthValidator(10, 10, $phoneNumber)
         && $formValid->emailValidator($email)
-        && $formValid->lengthValidator(0, 51, $username);
+        && $formValid->lengthValidator(0, 51, $username) && $formValid->lengthValidator(5, 100, $password);
       if (!$check) {
         echo json_encode(['message' => "Invalid data", 'status' => 409]);
       } else {

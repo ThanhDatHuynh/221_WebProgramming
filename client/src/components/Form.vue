@@ -17,11 +17,15 @@
         :label="'Phone'" :errorMessage="errorMessages.phone" />
       <FormField @onInputChange="handleFormChange($event, 'email')" name="email" :value="data.email"
         :errorMessage="errorMessages.email" type="EmailIcon" :label="'Email'" />
-      <FormField @onInputChange="handleFormChange($event, 'password')" name="password" :value="data.password"
-        type="PasswordIcon" :label="'Password'" :errorMessage="errorMessages.password" />
-      <FormField @onInputChange="handleFormChange($event, 'confirmPassword')" name="confirmPassword"
-        :value="data.confirmPassword" type="PasswordIcon" :label="'Confirm Password'"
-        :errorMessage="errorMessages.password" />
+      <FormField @onInputChange="handleFormChange($event, 'password')" 
+      name="password" 
+      :value="data.password"
+      type="PasswordIcon" :label="'Password'" :errorMessage="errorMessages.password" />
+      <FormField @onInputChange="handleFormChange($event, 'confirmPassword')" 
+      name="confirmPassword"
+      :value="data.confirmPassword" 
+      type="PasswordIcon" :label="'Confirm Password'"
+        :errorMessage="errorMessages.confirmPassword" />
       <Button @onClick="handleSumbit" text="Sign up" width="257px" height="64px" :isDisabled="isDisabled" />
     </v-form>
   </div>

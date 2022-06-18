@@ -49,7 +49,8 @@ class UserController
   //   $db = Db::getInstance();
   //   $sql = 'select * from order, food, food_order_relation'; 
   // }
-  public function getPublicInfo() {
+  public function getPublicInfo()
+  {
     $db = Db::getInstance();
     $sql = 'SELECT * FROM public_infomation';
     $result = mysqli_query($db, $sql);
@@ -81,9 +82,9 @@ class UserController
       $new_password = $_POST['new_password'];
       $verify_password = $_POST['verify_password'];
 
-      $check = $formValid->lengthValidator(6, 100, $new_password)
-        && $formValid->lengthValidator(6, 100, $old_password)
-        && $formValid->lengthValidator(6, 100, $verify_password);
+      $check = $formValid->lengthValidator(5, 100, $new_password)
+        && $formValid->lengthValidator(5, 100, $old_password)
+        && $formValid->lengthValidator(5, 100, $verify_password);
 
       if ($check) {
         $sql = "SELECT password from user where id = $id";
@@ -101,7 +102,7 @@ class UserController
             echo json_encode(['message' => "Server or database is error", 'status' => 500]);
           }
         } else {
-          echo json_encode(['message' => "Invalid action[verify != new || old_password is wrong]", 'status' => 401]);
+          echo json_encode(['message' => "Invalid action, old password is wrong!", 'status' => 401]);
         }
       } else {
         echo json_encode(['message' => "Invalid some fields", 'status' => 400]);
@@ -405,8 +406,8 @@ class UserController
       $check = $formValid->emailValidator($email)
         && $formValid->lengthValidator(10, 10, $phoneNumber)
         && $formValid->lengthValidator(1, 30, $name);
-        //&& $formValid->dateValidator($date)
-        //&& $formValid->timeValidator($time);
+      //&& $formValid->dateValidator($date)
+      //&& $formValid->timeValidator($time);
       if ($check) {
         $sql = "insert into reservation (name, email, phoneNumber, NoP, date, time, description) values('$name', '$email', '$phoneNumber', $NoP, '$date', '$time', '$description')";
         $result = mysqli_query($db, $sql);
