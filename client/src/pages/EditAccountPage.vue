@@ -96,7 +96,10 @@ export default {
         username: yup.string().min(1).label("Username"),
         password: yup.string().min(5).label("Password"),
         newPassword: yup.string().min(5).label("Password"),
-        //confirmNewPassword: yup.string().oneOf([yup.ref('newPassword'), null], 'Password is not match!'),
+        // confirmNewPassword: yup.string().oneOf(
+        //   [yup.ref("newPassword")],
+        //   "Both password need to be the same"
+        // ),
         email: yup.string().email().label("Email"),
       }),
     };

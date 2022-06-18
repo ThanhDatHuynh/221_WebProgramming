@@ -1,5 +1,12 @@
 <template>
     <div style="min-height:70%;">
+        <div class="text-center">
+            <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
+                reservations.length % 5 === 0
+                    ? Math.floor(reservations.length / 5)
+                    : Math.floor(reservations.length / 5) + 1
+            " circle></v-pagination>
+            </div>
         <div class="d-flex flex-wrap justify-center">
             <AdminItem type="ReservationHeader" :width="'100vw'" :height="'100px'" :imgSize="'70px'"
                 :items="['ID', 'Name', 'Date', 'Time']" />
@@ -55,13 +62,7 @@
                 </modal-vue>
             </div>
         </div>
-        <div class="text-center">
-            <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
-                reservations.length % 5 === 0
-                    ? Math.floor(reservations.length / 5)
-                    : Math.floor(reservations.length / 5) + 1
-            " circle></v-pagination>
-        </div>
+        
     </div>
 </template>
 <style scoped>
