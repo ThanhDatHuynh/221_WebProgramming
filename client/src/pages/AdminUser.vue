@@ -74,18 +74,23 @@ export default {
         },
 
         blockUser() {
-            var restURL = this.users[parseInt(this.idUserBlock) - 1].block ? "unblock_user" : "block_user";
+            var restUser = undefined
+            this.users.forEach(user => {
+                if (user.id == this.idUserBlock) restUser = user;
+            });
+            var restURL = restUser.block ? "unblock_user" : "block_user";
             var settings = {
                 url: `${process.env.VUE_APP_API_URL}/admin/${restURL}`,
                 method: "POST",
                 timeout: 0,
                 data: {
-                    email: this.users[parseInt(this.idUserBlock) - 1].email
+                    email: restUser.email
                 },
                 headers: {
                     "Bear-Token": localStorage.getItem("UserToken"),
                 },
             };
+            console.log("This run")
             $.ajax(settings)
                 .done(() => {
                     this.$router.go(this.$router.current);
@@ -139,8 +144,6 @@ export default {
                             }
                         });
                         __this.users = a;
-
-
                     })
             });
 
