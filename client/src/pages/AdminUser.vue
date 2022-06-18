@@ -90,7 +90,6 @@ export default {
                     "Bear-Token": localStorage.getItem("UserToken"),
                 },
             };
-            console.log("This run")
             $.ajax(settings)
                 .done(() => {
                     this.$router.go(this.$router.current);

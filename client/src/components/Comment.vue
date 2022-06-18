@@ -12,8 +12,10 @@
               style="padding = 0"
               placeholder="Say something"
               v-model="commentData"
-            ></v-textarea>
+              @change="handleChange($event)"
+            ></v-textarea>            
           </v-lazy>
+          <p v-show="isFail" style="color:red;">{{cmtMessage}}</p>
         </v-container>
       </div>
       <v-spacer />
@@ -41,6 +43,8 @@ export default {
   },
   data() {
     return {
+      cmtMessage: "",
+      isFail: false,
       commentData: "",
       userToken: localStorage.getItem("UserToken"),
       userID: JSON.parse(localStorage.getItem("User")).id,
@@ -49,13 +53,27 @@ export default {
   },
 
   methods: {
+    handleChange(value) {
+      if (value == "") {
+        this.isFail = true;
+        this.cmtMessage = "Please type something in comment!";
+      }
+      else {
+        this.isFail = false;
+        this.cmtMessage = "";
+      }
+    },
     reloadPage() {
       this.$router.go(this.$router.current);
     },
 
     PostComment() {
       const __this = this;
-
+      if (this.commentData == "") {
+        this.isFail = true;
+        this.cmtMessage = "Please type something in comment!";
+        return;
+      }
       var settings = {
         url: `${process.env.VUE_APP_API_URL}/comment/create`,
         method: "POST",
