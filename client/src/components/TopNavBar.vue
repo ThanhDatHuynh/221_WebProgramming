@@ -103,6 +103,17 @@ export default {
 </script>
 
 <style scoped>
+.linkText {
+  color: white;
+}
+a {
+  transition: transform 0.1.5s;
+}
+a:hover {
+    transform: scale(
+    1.1
+  ); 
+}
 span {
   transition: transform 0.1.5s; /* Animation */
 }

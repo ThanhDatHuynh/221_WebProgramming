@@ -97,6 +97,22 @@ export default {
 </script>
 
 <style scoped>
+a {
+  transition: transform 0.1.5s;
+}
+a:hover {
+    transform: scale(
+    1.1
+  ); 
+}
+span {
+  transition: transform 0.1.5s; /* Animation */
+}
+span:hover {
+  transform: scale(
+    1.2
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
 .container {
   width: 100vw;
   margin: 0;
