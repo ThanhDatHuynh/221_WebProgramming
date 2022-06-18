@@ -4,8 +4,10 @@
       <v-layout align-center justify-space-around style="flex-wrap:wrap">
         <h1 class="text-center mt-10">{{ item.blog.title }}</h1>
         <div style="width:100%;display:flex;justify-content:center; margin: 20px 0px 20px 0;">
-          <v-btn v-show="manager == '1'" @click="this.deletePost" width="7vw" height="2.5vw" color="#e1651f">
+          <v-btn v-show="manager == '1'" @click="toggleDeleteBtn()" width="7vw" height="2.5vw" color="#e1651f">
             <span class="linkText">Delete</span>
+            <ModalConfirm @toggleModalEvent="toggleDeleteBtn()" :isOpen="this.isModalOpen" :title="'Are you sure ?'"
+            :content="'Do you want to delete this blog?'" @callbackEvent="deletePost" />
           </v-btn>
           <div style="width:5%"></div>
           <v-btn v-show="manager == '1'" @click="this.routeToEditBlog" width="7vw" height="2.5vw" color="#e1651f">
@@ -48,8 +50,9 @@ import Comment from "../components/Comment.vue";
 import Paragraph from "../components/Paragraph.vue";
 import $ from "jquery";
 import CommentListItem from "../components/CommentListItem.vue";
+import ModalConfirm from "../components/ModalConfirm.vue";
 export default {
-  components: { Paragraph, Comment, CommentListItem },
+  components: { Paragraph, Comment, CommentListItem, ModalConfirm },
   name: "blogDetail",
   data() {
     var managerValue = "0";
@@ -69,6 +72,7 @@ export default {
       numBlog: this.$route.params.id,
       manager: managerValue,
       user: userValue,
+      isModalOpen: false,
     };
   },
   computed: {
@@ -82,6 +86,9 @@ export default {
     },
   },
   methods: {
+    toggleDeleteBtn() {
+      this.isModalOpen = !this.isModalOpen;
+    },
     reloadPage() {
       this.$router.push("/blog");
     },
