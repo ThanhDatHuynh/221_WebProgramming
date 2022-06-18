@@ -13,16 +13,16 @@
     </div>
     <div class="d-flex flex-wrap justify-center">
       <div v-for="dish in dishes.filter(
-        (_, index) => index >= (page - 1) * 8 && index <= page * 8 - 1
+        (_, index) => index >= (page - 1) * 6 && index <= page * 6 - 1
       )" :key="dish.id">
         <Dish :dish="dish" />
       </div>
     </div>
     <div class="text-center">
       <v-pagination class="mt-4 mb-8" v-model="modelPage" color="#e1651f" :length="
-        dishes.length % 8 === 0
-          ? Math.floor(dishes.length / 8)
-          : Math.floor(dishes.length / 8) + 1
+        dishes.length % 6 === 0
+          ? Math.floor(dishes.length / 6)
+          : Math.floor(dishes.length / 6) + 1
       " circle>
       </v-pagination>
     </div>

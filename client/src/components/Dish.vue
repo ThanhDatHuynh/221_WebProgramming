@@ -29,8 +29,22 @@ export default {
 .dish-container {
   padding: 4% 8% 0% 8%;
 }
+@keyframes example {
+  from {
+    opacity: 0;
+    transform: scale(0.3);
+    filter: hue-rotate(180deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+}
 .zoom-out {
-      transition: transform .1.5s; /* Animation */
+  animation: example 700ms ease-out;
+  animation-fill-mode: backwards;
+  transition: transform .1.5s; /* Animation */
 }
 .zoom-out:hover {
   transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
