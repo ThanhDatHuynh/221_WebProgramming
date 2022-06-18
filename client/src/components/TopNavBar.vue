@@ -6,14 +6,14 @@
         style="background-color:darkgray"
         type="button"
         data-toggle="collapse"
-        data-target="#navbarSupportedContent"
+        data-target="#navbarSupportedContent-user"
         aria-controls="navbarSupportedContent"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-user">
         <ul class="navbar-nav me-0 ms-auto text-center">
           <li class="nav-item">
             <div v-show="user != null" class="nav-link">
