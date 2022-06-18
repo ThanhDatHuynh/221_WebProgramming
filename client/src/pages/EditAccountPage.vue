@@ -93,14 +93,17 @@ export default {
         confirmNewPassword: "",
       },
       schema: yup.object().shape({
-        username: yup.string().min(1).label("Username"),
+        username: yup.string().min(1, "Please type your username!").label("Username"),
         password: yup.string().min(5).label("Password"),
         newPassword: yup.string().min(5).label("Password"),
         // confirmNewPassword: yup.string().oneOf(
         //   [yup.ref("newPassword")],
         //   "Both password need to be the same"
         // ),
-        email: yup.string().email().label("Email"),
+        phone: yup
+          .string()
+          .matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
+        email: yup.string().min(1, "Please type your email!").email().label("Email"),
       }),
     };
   },
